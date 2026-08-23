@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  
+  <!-- SEO & Social Sharing Meta Tags (Perfect for Instagram Bio & DMs) -->
+  <title>Priyanshu Kumar | Developer Portfolio & Link in Bio</title>
+  <meta name="description" content="Priyanshu Kumar - Frontend & Full-Stack Developer. Explore live projects, web apps, portfolio, tech stack, and direct contact links." />
+  <meta name="author" content="Priyanshu Kumar" />
+  <meta name="theme-color" content="#0b0f19" />
+  
+  <!-- Open Graph / Instagram / WhatsApp Preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Priyanshu Kumar | Developer Hub & Portfolio" />
+  <meta property="og:description" content="Explore my projects, full-stack web applications, resume, and connect with me directly." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=80" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Priyanshu Kumar | Developer Hub & Portfolio" />
+  <meta name="twitter:description" content="Explore live web apps, portfolio, resume, and contact links." />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Ambient Glowing Background Elements -->
+  <div class="bg-ambient">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="bg-grid-overlay"></div>
+  </div>
+
+  <!-- Main Container Wrapper -->
+  <div class="bio-wrapper">
+
+    <!-- Top Sticky Utility Bar -->
+    <header class="top-bar">
+      <a href="#" class="brand-badge">
+        <span class="logo-icon"><i class="fa-solid fa-code"></i></span>
+        <span>PK.<span style="color: var(--primary-light);">dev</span></span>
+      </a>
+
+      <div class="top-actions">
+        <!-- Theme Switcher -->
+        <div class="theme-dropdown">
+          <button class="top-btn" id="theme-btn" title="Change Theme">
+            <i class="fa-solid fa-palette"></i>
+            <span style="display: none;" class="theme-text">Theme</span>
+          </button>
+          <div class="theme-menu" id="theme-menu">
+            <button class="theme-opt" data-theme="violet">
+              <span class="theme-dot" style="background: #8b5cf6;"></span> Cyber Violet
+            </button>
+            <button class="theme-opt" data-theme="cyan">
+              <span class="theme-dot" style="background: #06b6d4;"></span> Electric Cyan
+            </button>
+            <button class="theme-opt" data-theme="emerald">
+              <span class="theme-dot" style="background: #10b981;"></span> Emerald Matrix
+            </button>
+            <button class="theme-opt" data-theme="amber">
+              <span class="theme-dot" style="background: #f59e0b;"></span> Sunset Amber
+            </button>
+            <button class="theme-opt" data-theme="obsidian">
+              <span class="theme-dot" style="background: #ffffff;"></span> Minimal Dark
+            </button>
+          </div>
+        </div>
+
+        <!-- Share / QR Button -->
+        <button class="top-btn" onclick="openShareModal()" title="Share Profile / Scan QR">
+          <i class="fa-solid fa-share-nodes"></i>
+          <span>Share</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Profile Hero Card -->
+    <section class="profile-card">
+      <!-- Avatar with Online Status Indicator -->
+      <div class="avatar-wrapper">
+        <div class="avatar-fallback">PK</div>
+        <div class="avatar-badge-online" title="Online & Available"></div>
+      </div>
+
+      <!-- Availability Status Badge -->
+      <div>
+        <div class="status-pill">
+          <span class="status-dot-pulse"></span>
+          <span>Available for Freelance &amp; Projects</span>
+        </div>
+      </div>
+
+      <!-- Name & Verified Check -->
+      <h1 class="profile-name">
+        Priyanshu Kumar
+        <span class="verify-badge" title="Verified Creator & Developer"><i class="fa-solid fa-circle-check"></i></span>
+      </h1>
+
+      <!-- Dynamic Typing Tagline -->
+      <p class="profile-tagline" id="typing-text">Frontend &amp; Full-Stack Developer</p>
+
+      <!-- Bio Description -->
+      <p class="profile-bio">
+        Passionate developer creating modern, high-performance web applications, interactive tools &amp; responsive UI/UX experiences.
+      </p>
+
+      <!-- Quick Metrics Stats Row -->
+      <div class="profile-stats-row">
+        <div class="stat-item">
+          <span class="stat-val">20+</span>
+          <span class="stat-lbl">Projects</span>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat-item">
+          <span class="stat-val">Full-Stack</span>
+          <span class="stat-lbl">Focus</span>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat-item">
+          <span class="stat-val">100%</span>
+          <span class="stat-lbl">Responsive</span>
+        </div>
+      </div>
+
+      <!-- Social Media Quick Pill Grid -->
+      <div class="social-links-grid">
+        <a href="https://github.com/Priyanshu-kumar-maurya" target="_blank" rel="noopener noreferrer" class="social-pill" title="GitHub Profile">
+          <i class="fa-brands fa-github"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-pill" title="Instagram Profile">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://wa.me/918858003033" target="_blank" rel="noopener noreferrer" class="social-pill" title="WhatsApp Message">
+          <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="mailto:codexpriyanshu65@gmail.com" class="social-pill" title="Send Direct Email">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- Primary Quick Actions Bento Grid -->
+    <section class="highlight-actions-grid">
+      <!-- Download Resume Action -->
+      <a href="../My New protfolio/PRIYANSHU (1).pdf" download="Priyanshu_Kumar_Resume.pdf" class="action-card featured-action">
+        <div class="action-card-left">
+          <div class="action-icon"><i class="fa-solid fa-file-arrow-down"></i></div>
+          <div class="action-text">
+            <span class="action-title">Download Resume (CV)</span>
+            <span class="action-subtitle">PDF • Priyanshu Kumar</span>
+          </div>
+        </div>
+        <div class="action-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+      </a>
+
+      <!-- View Full Portfolio Website -->
+      <a href="https://priyanshu-kumar-maurya.github.io/Portfolio/" target="_blank" rel="noopener noreferrer" class="action-card">
+        <div class="action-card-left">
+          <div class="action-icon"><i class="fa-solid fa-globe"></i></div>
+          <div class="action-text">
+            <span class="action-title">Official Portfolio Site</span>
+            <span class="action-subtitle">priyanshu-kumar-maurya.github.io</span>
+          </div>
+        </div>
+        <div class="action-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+      </a>
+
+      <!-- Instant WhatsApp Chat Action -->
+      <a href="https://wa.me/918858003033?text=Hi%20Priyanshu!%20I%20came%20from%20your%20Instagram%20Bio." target="_blank" rel="noopener noreferrer" class="action-card whatsapp-action">
+        <div class="action-card-left">
+          <div class="action-icon"><i class="fa-brands fa-whatsapp"></i></div>
+          <div class="action-text">
+            <span class="action-title">Chat on WhatsApp</span>
+            <span class="action-subtitle">Instant response &amp; project talk</span>
+          </div>
+        </div>
+        <div class="action-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+      </a>
+
+      <!-- Direct Email Action -->
+      <a href="mailto:codexpriyanshu65@gmail.com?subject=Project%20Inquiry%20from%20Instagram%20Bio" class="action-card">
+        <div class="action-card-left">
+          <div class="action-icon"><i class="fa-solid fa-paper-plane"></i></div>
+          <div class="action-text">
+            <span class="action-title">Send Email Inquiry</span>
+            <span class="action-subtitle">codexpriyanshu65@gmail.com</span>
+          </div>
+        </div>
+        <div class="action-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+      </a>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects-container">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fa-solid fa-laptop-code" style="color: var(--primary-light);"></i>
+          My Projects
+          <span class="badge-count" id="project-count-badge">12</span>
+        </h2>
+      </div>
+
+      <!-- Real-time Search Box -->
+      <div class="search-box-wrapper">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="search-input" class="search-input" placeholder="Search projects by name, tech stack or keyword..." autocomplete="off" />
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="filter-tabs">
+        <button class="filter-tab active" data-category="all">🌟 All Projects</button>
+        <button class="filter-tab" data-category="fullstack">🚀 Full-Stack Apps</button>
+        <button class="filter-tab" data-category="ecommerce">🛍️ E-Commerce</button>
+        <button class="filter-tab" data-category="games">🎮 Games &amp; Tools</button>
+        <button class="filter-tab" data-category="showcase">⚡ Landing Pages</button>
+      </div>
+
+      <!-- Dynamic Cards Grid (Populated by JavaScript) -->
+      <div class="projects-grid" id="projects-grid">
+        <!-- Rendered via bio/script.js -->
+      </div>
+    </section>
+
+    <!-- Skills & Tech Stack Bento Card -->
+    <section class="bento-skills-card">
+      <div class="section-header" style="margin-bottom: 0.85rem; padding: 0;">
+        <h2 class="section-title">
+          <i class="fa-solid fa-layer-group" style="color: var(--primary-light);"></i>
+          Skills &amp; Tech Stack
+        </h2>
+      </div>
+
+      <div class="skills-tags-wrap">
+        <div class="skill-pill"><i class="fa-brands fa-react"></i> React.js</div>
+        <div class="skill-pill"><i class="fa-brands fa-js"></i> JavaScript (ES6+)</div>
+        <div class="skill-pill"><i class="fa-brands fa-html5"></i> HTML5</div>
+        <div class="skill-pill"><i class="fa-brands fa-css3-alt"></i> CSS3</div>
+        <div class="skill-pill"><i class="fa-solid fa-wind"></i> Tailwind CSS</div>
+        <div class="skill-pill"><i class="fa-brands fa-node-js"></i> Node.js &amp; Express</div>
+        <div class="skill-pill"><i class="fa-solid fa-database"></i> SQLite &amp; Databases</div>
+        <div class="skill-pill"><i class="fa-brands fa-git-alt"></i> Git &amp; GitHub</div>
+        <div class="skill-pill"><i class="fa-solid fa-mobile-screen"></i> Responsive UI/UX</div>
+        <div class="skill-pill"><i class="fa-solid fa-bolt"></i> REST APIs &amp; PWA</div>
+      </div>
+    </section>
+
+    <!-- Instant WhatsApp Prompt & Quick Hire Section -->
+    <section class="contact-hub-card">
+      <div class="section-header" style="margin-bottom: 0; padding: 0;">
+        <h2 class="section-title">
+          <i class="fa-solid fa-comment-dots" style="color: #34d399;"></i>
+          Quick Message &amp; Hire
+        </h2>
+      </div>
+
+      <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5;">
+        Have a project idea, website requirement or want to hire me? Tap any option below to chat directly:
+      </p>
+
+      <!-- WhatsApp 1-Tap Quick Prompts -->
+      <div>
+        <div class="quick-prompts-title">💬 Tap to start WhatsApp Chat with prefilled message:</div>
+        <div class="quick-prompts-grid">
+          <button class="quick-prompt-btn" onclick="sendWhatsAppPrompt('hire')">
+            <span><span class="emoji">💼</span> Hire for a Project</span>
+            <i class="fa-solid fa-arrow-right" style="font-size: 0.75rem;"></i>
+          </button>
+          <button class="quick-prompt-btn" onclick="sendWhatsAppPrompt('freelance')">
+            <span><span class="emoji">🌐</span> Need a Website Built</span>
+            <i class="fa-solid fa-arrow-right" style="font-size: 0.75rem;"></i>
+          </button>
+          <button class="quick-prompt-btn" onclick="sendWhatsAppPrompt('collab')">
+            <span><span class="emoji">🤝</span> Work Collaboration</span>
+            <i class="fa-solid fa-arrow-right" style="font-size: 0.75rem;"></i>
+          </button>
+          <button class="quick-prompt-btn" onclick="sendWhatsAppPrompt('hello')">
+            <span><span class="emoji">👋</span> Just Saying Hello!</span>
+            <i class="fa-solid fa-arrow-right" style="font-size: 0.75rem;"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Copy Email Address Bar -->
+      <div class="copy-email-bar">
+        <span class="email-txt">codexpriyanshu65@gmail.com</span>
+        <button class="btn-copy" onclick="copyToClipboard('codexpriyanshu65@gmail.com', 'Email copied to clipboard! ✉️')">
+          <i class="fa-regular fa-copy"></i> Copy
+        </button>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bio-footer">
+      <p>© 2026 Priyanshu Kumar. Built for Instagram &amp; Web.</p>
+      <p>Made with <i class="fa-solid fa-heart" style="color: #ec4899;"></i> for the developer community.</p>
+    </footer>
+
+  </div>
+
+  <!-- ================= MODALS & POPUPS ================= -->
+
+  <!-- 1. Project Details Modal -->
+  <div class="modal-overlay" id="project-modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeProjectModal()" aria-label="Close modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div id="project-modal-body">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Share & QR Code Modal -->
+  <div class="modal-overlay" id="share-modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeShareModal()" aria-label="Close modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      
+      <div class="qr-display-box">
+        <div>
+          <h2 style="font-family: var(--font-heading); font-size: 1.35rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.25rem;">
+            Share Profile
+          </h2>
+          <p style="font-size: 0.82rem; color: var(--text-muted);">
+            Scan this QR code with any smartphone camera to open this bio page instantly.
+          </p>
+        </div>
+
+        <div class="qr-canvas-wrap" id="qr-canvas-container">
+          <!-- QR image rendered here -->
+        </div>
+
+        <div style="width: 100%; display: flex; flex-direction: column; gap: 0.65rem;">
+          <input type="text" id="share-url-input" class="search-input" readonly style="text-align: center; font-size: 0.8rem;" />
+          
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="btn-card btn-card-primary" onclick="handleNativeShare()" style="padding: 0.65rem;">
+              <i class="fa-solid fa-share-nodes"></i> Share Link
+            </button>
+            <button class="btn-card btn-card-secondary" onclick="copyToClipboard(window.location.href, 'Bio page link copied! 📋')" style="padding: 0.65rem;">
+              <i class="fa-regular fa-copy"></i> Copy Link
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+</body>
+</html>
