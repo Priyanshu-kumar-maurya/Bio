@@ -1212,6 +1212,157 @@ body {
   opacity: 1;
 }
 
+/* --- Resume Modal Styling --- */
+.resume-modal-content {
+  max-width: min(94vw, 560px);
+}
+
+.resume-sheet {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.resume-header {
+  border-bottom: 1px solid var(--card-border);
+  padding-bottom: 0.85rem;
+}
+
+.resume-name {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.resume-role {
+  font-size: 0.88rem;
+  color: var(--primary-light);
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.resume-meta-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.resume-meta-tags span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.resume-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+}
+
+.resume-sec-title {
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.2rem;
+}
+
+.resume-sec-title i {
+  color: var(--primary-light);
+  font-size: 0.85rem;
+}
+
+.resume-sec-text {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.resume-skills-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.resume-skill-group strong {
+  color: var(--text-main);
+}
+
+.resume-project-item {
+  margin-bottom: 0.45rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.resume-proj-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+
+.resume-proj-head strong {
+  color: var(--text-main);
+}
+
+.resume-proj-head span {
+  font-size: 0.72rem;
+  color: var(--primary-light);
+}
+
+.resume-actions-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--card-border);
+}
+
+/* Print Stylesheet for Saving as Clean PDF */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .bg-ambient, .top-bar, .profile-card, .highlight-actions-grid, .projects-container, .bento-skills-card, .contact-hub-card, .bio-footer, .modal-close, .resume-actions-bar {
+    display: none !important;
+  }
+  .modal-overlay {
+    position: static !important;
+    display: block !important;
+    background: none !important;
+    padding: 0 !important;
+  }
+  .modal-content {
+    background: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: #111827 !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+  .resume-name, .resume-sec-title, .resume-proj-head strong, .resume-skill-group strong {
+    color: #000000 !important;
+  }
+  .resume-role, .resume-proj-head span {
+    color: #4f46e5 !important;
+  }
+  .resume-sec-text, .resume-meta-tags, .resume-skills-grid, .resume-project-item p {
+    color: #374151 !important;
+  }
+}
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-5px); }
   to { opacity: 1; transform: translateY(0); }

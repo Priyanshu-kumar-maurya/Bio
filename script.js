@@ -591,20 +591,38 @@ function sendWhatsAppPrompt(promptType) {
   window.open(`https://wa.me/${phoneNumber}?text=${encoded}`, "_blank");
 }
 
+// --- Digital Resume Modal ---
+const resumeModalOverlay = document.getElementById("resume-modal-overlay");
+
+function openResumeModal() {
+  if (!resumeModalOverlay) return;
+  resumeModalOverlay.classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeResumeModal() {
+  if (resumeModalOverlay) {
+    resumeModalOverlay.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+}
+
 // --- Close Modals on Backdrop / ESC Key ---
 window.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     closeProjectModal();
     closeShareModal();
+    closeResumeModal();
   }
 });
 
-[projectModalOverlay, shareModalOverlay].forEach(overlay => {
+[projectModalOverlay, shareModalOverlay, resumeModalOverlay].forEach(overlay => {
   if (overlay) {
     overlay.addEventListener("click", (e) => {
       if (e.target === overlay) {
         closeProjectModal();
         closeShareModal();
+        closeResumeModal();
       }
     });
   }

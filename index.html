@@ -153,17 +153,17 @@
 
     <!-- Primary Quick Actions Bento Grid -->
     <section class="highlight-actions-grid">
-      <!-- Download Resume Action -->
-      <a href="../My New protfolio/PRIYANSHU (1).pdf" download="Priyanshu_Kumar_Resume.pdf" class="action-card featured-action">
+      <!-- View / Download Resume Action -->
+      <div class="action-card featured-action" onclick="openResumeModal()" role="button" tabindex="0" style="cursor: pointer;" title="View Digital Resume">
         <div class="action-card-left">
-          <div class="action-icon"><i class="fa-solid fa-file-arrow-down"></i></div>
+          <div class="action-icon"><i class="fa-solid fa-file-invoice"></i></div>
           <div class="action-text">
-            <span class="action-title">Download Resume (CV)</span>
-            <span class="action-subtitle">PDF • Priyanshu Kumar</span>
+            <span class="action-title">View Resume (CV)</span>
+            <span class="action-subtitle">Interactive CV • Skills &amp; Projects</span>
           </div>
         </div>
         <div class="action-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-      </a>
+      </div>
 
       <!-- View Full Portfolio Website -->
       <a href="https://priyanshu-kumar-maurya.github.io/Portfolio/" target="_blank" rel="noopener noreferrer" class="action-card">
@@ -355,6 +355,90 @@
               <i class="fa-regular fa-copy"></i> Copy Link
             </button>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Digital Resume Modal -->
+  <div class="modal-overlay" id="resume-modal-overlay">
+    <div class="modal-content resume-modal-content">
+      <button class="modal-close" onclick="closeResumeModal()" aria-label="Close resume modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      
+      <div class="resume-sheet">
+        <div class="resume-header">
+          <div class="resume-title-wrap">
+            <h2 class="resume-name">Priyanshu Kumar</h2>
+            <p class="resume-role">Frontend &amp; Full-Stack Web Developer</p>
+          </div>
+          <div class="resume-meta-tags">
+            <span><i class="fa-solid fa-location-dot"></i> India</span>
+            <span><i class="fa-solid fa-envelope"></i> codexpriyanshu65@gmail.com</span>
+            <span><i class="fa-brands fa-github"></i> github.com/Priyanshu-kumar-maurya</span>
+          </div>
+        </div>
+
+        <div class="resume-body">
+          <div class="resume-section">
+            <h3 class="resume-sec-title"><i class="fa-solid fa-user"></i> Professional Summary</h3>
+            <p class="resume-sec-text">
+              Passionate Frontend &amp; Full-Stack Developer with strong expertise in building modern, interactive, and responsive web applications. Hands-on proficiency with React.js, JavaScript (ES6+), Tailwind CSS, Node.js, Express, and REST APIs. Dedicated to crafting pixel-perfect, accessible, and high-performance digital user experiences.
+            </p>
+          </div>
+
+          <div class="resume-section">
+            <h3 class="resume-sec-title"><i class="fa-solid fa-code"></i> Technical Skills</h3>
+            <div class="resume-skills-grid">
+              <div class="resume-skill-group">
+                <strong>Frontend:</strong> React.js, JavaScript (ES6+), HTML5, CSS3, Tailwind CSS, Responsive UI/UX
+              </div>
+              <div class="resume-skill-group">
+                <strong>Backend &amp; DB:</strong> Node.js, Express.js, REST APIs, SQLite, User Authentication
+              </div>
+              <div class="resume-skill-group">
+                <strong>Tools &amp; Deploy:</strong> Git, GitHub, VS Code, Vercel, Netlify, PWA, Render
+              </div>
+            </div>
+          </div>
+
+          <div class="resume-section">
+            <h3 class="resume-sec-title"><i class="fa-solid fa-briefcase"></i> Featured Projects</h3>
+            <div class="resume-project-item">
+              <div class="resume-proj-head">
+                <strong>Typing Fighter Game</strong> <span>PWA Arcade</span>
+              </div>
+              <p>Combat typing game with combo multipliers, canvas animations, and offline PWA support.</p>
+            </div>
+            <div class="resume-project-item">
+              <div class="resume-proj-head">
+                <strong>Companion App</strong> <span>Full-Stack &amp; Chat</span>
+              </div>
+              <p>Full-stack companion booking web application with real-time chat and responsive interface.</p>
+            </div>
+            <div class="resume-project-item">
+              <div class="resume-proj-head">
+                <strong>Hotel QR Ordering System</strong> <span>Smart Ordering</span>
+              </div>
+              <p>Contactless QR dining application with live digital menu browsing and order management.</p>
+            </div>
+            <div class="resume-project-item">
+              <div class="resume-proj-head">
+                <strong>Library Management System</strong> <span>Role-Based Portal</span>
+              </div>
+              <p>Web portal with Admin and Student login, inventory management, and issue/return tracking.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="resume-actions-bar">
+          <button class="btn-card btn-card-primary" onclick="window.print()" style="padding: 0.65rem;">
+            <i class="fa-solid fa-print"></i> Print / Save as PDF
+          </button>
+          <a href="https://wa.me/918858003033?text=Hi%20Priyanshu!%20I%20reviewed%20your%20Resume%20and%20want%20to%20connect." target="_blank" rel="noopener noreferrer" class="btn-card btn-card-secondary" style="padding: 0.65rem;">
+            <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+          </a>
         </div>
       </div>
     </div>
