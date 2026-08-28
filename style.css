@@ -398,6 +398,17 @@ body {
   margin: 0 auto 0.9rem;
 }
 
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--bg-dark);
+  box-shadow: var(--shadow-glow);
+  display: block;
+  background: var(--gradient-main);
+}
+
 .avatar-fallback {
   width: 100%;
   height: 100%;
