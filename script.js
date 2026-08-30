@@ -1,13 +1,18 @@
 /* ==========================================================================
    INSTAGRAM BIO LINK-IN-BIO & DEVELOPER HUB - JAVASCRIPT
    Author: Priyanshu Kumar (GitHub: Priyanshu-kumar-maurya)
-   All Projects Synchronized with official GitHub Repositories & Real Live URLs
+   ⚡ 100% AUTOMATIC GITHUB SYNC ENGINE:
+   Automatically fetches & displays all new repositories from GitHub in Real-Time!
    ========================================================================== */
 
-// --- 100% Official Projects Directly from github.com/Priyanshu-kumar-maurya ---
-const projectsData = [
+const GITHUB_USERNAME = "Priyanshu-kumar-maurya";
+const GITHUB_REPOS_API = `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`;
+
+// --- Curated Base Projects Database (Instant Cache & Fallback) ---
+const baseProjectsData = [
   {
     id: "typing-fighter-game",
+    name: "typing-fighter-game",
     title: "Typing Fighter Game",
     category: "games",
     categoryLabel: "Game / Arcade",
@@ -21,6 +26,7 @@ const projectsData = [
   },
   {
     id: "companion-app",
+    name: "companion-app",
     title: "Companion App",
     category: "fullstack",
     categoryLabel: "Full-Stack App",
@@ -34,6 +40,7 @@ const projectsData = [
   },
   {
     id: "event-planning-system",
+    name: "Event-Planning-System-",
     title: "Event Planning System",
     category: "fullstack",
     categoryLabel: "Full-Stack System",
@@ -47,6 +54,7 @@ const projectsData = [
   },
   {
     id: "hotel-qr-project",
+    name: "Hotel-QR-Project",
     title: "Hotel QR Ordering System",
     category: "fullstack",
     categoryLabel: "Smart Ordering",
@@ -60,6 +68,7 @@ const projectsData = [
   },
   {
     id: "cockroach-mutual-aid",
+    name: "cockroach-mutual-aid",
     title: "Mutual Aid Platform",
     category: "fullstack",
     categoryLabel: "Community Portal",
@@ -73,6 +82,7 @@ const projectsData = [
   },
   {
     id: "public-bulletin-news",
+    name: "public-bulletin-news",
     title: "Public Bulletin News",
     category: "fullstack",
     categoryLabel: "News / Bulletin",
@@ -86,6 +96,7 @@ const projectsData = [
   },
   {
     id: "bpo-bakaiti-hub",
+    name: "bpo-bakaiti-hub",
     title: "BPO Community Hub",
     category: "fullstack",
     categoryLabel: "Web Platform",
@@ -99,6 +110,7 @@ const projectsData = [
   },
   {
     id: "library-project",
+    name: "library-project",
     title: "Library Management System",
     category: "fullstack",
     categoryLabel: "Management Portal",
@@ -112,6 +124,7 @@ const projectsData = [
   },
   {
     id: "jp-library",
+    name: "Jp-Library",
     title: "JP Library Showcase",
     category: "showcase",
     categoryLabel: "Digital Catalog",
@@ -125,6 +138,7 @@ const projectsData = [
   },
   {
     id: "bmw-shop",
+    name: "BMW-SHOP",
     title: "BMW Luxury Auto Showcase",
     category: "ecommerce",
     categoryLabel: "Automotive / Store",
@@ -138,6 +152,7 @@ const projectsData = [
   },
   {
     id: "earrings-shop",
+    name: "Earrings-shop",
     title: "Earrings Luxury Boutique",
     category: "ecommerce",
     categoryLabel: "E-Commerce",
@@ -151,6 +166,7 @@ const projectsData = [
   },
   {
     id: "coffee-shop",
+    name: "Coffee-shop",
     title: "Cozy Coffee House",
     category: "showcase",
     categoryLabel: "Landing Page",
@@ -164,6 +180,7 @@ const projectsData = [
   },
   {
     id: "fast-foods",
+    name: "fast-foods",
     title: "Fast Foods Website",
     category: "ecommerce",
     categoryLabel: "Food Ordering",
@@ -177,6 +194,7 @@ const projectsData = [
   },
   {
     id: "portfolio-site",
+    name: "Portfolio",
     title: "Official Portfolio Site",
     category: "showcase",
     categoryLabel: "Portfolio",
@@ -190,6 +208,7 @@ const projectsData = [
   },
   {
     id: "codex-priyanshu",
+    name: "codex-priyanshu",
     title: "Codex Priyanshu Hub",
     category: "showcase",
     categoryLabel: "Developer Hub",
@@ -203,6 +222,7 @@ const projectsData = [
   },
   {
     id: "calculator",
+    name: "Calculator",
     title: "Modern Web Calculator",
     category: "games",
     categoryLabel: "Tool / Utility",
@@ -216,6 +236,7 @@ const projectsData = [
   },
   {
     id: "qr-code-generator",
+    name: "QR-code",
     title: "QR Code Generator",
     category: "games",
     categoryLabel: "Web Tool",
@@ -229,6 +250,7 @@ const projectsData = [
   },
   {
     id: "watch-app",
+    name: "watch",
     title: "Digital Clock & Watch",
     category: "games",
     categoryLabel: "Web Tool",
@@ -242,6 +264,7 @@ const projectsData = [
   },
   {
     id: "ambient-light-effects",
+    name: "Ambient-Light-Effects",
     title: "Ambient Light Effects",
     category: "games",
     categoryLabel: "CSS Experiment",
@@ -255,6 +278,7 @@ const projectsData = [
   },
   {
     id: "job-application-web",
+    name: "job-Application-web-",
     title: "Job Application Portal",
     category: "fullstack",
     categoryLabel: "Web Portal",
@@ -267,6 +291,172 @@ const projectsData = [
     featured: false
   }
 ];
+
+// Active Projects Array (Loaded from Cache or Base, and dynamically updated by GitHub API)
+let projectsData = [...baseProjectsData];
+
+// Load previously cached GitHub sync data if available
+const cachedProjects = localStorage.getItem("pk_github_projects_cache");
+if (cachedProjects) {
+  try {
+    const parsed = JSON.parse(cachedProjects);
+    if (Array.isArray(parsed) && parsed.length > 0) {
+      projectsData = parsed;
+    }
+  } catch (e) {
+    console.warn("Could not parse cached projects:", e);
+  }
+}
+
+// --- Smart Helpers for Dynamically Detected GitHub Repositories ---
+
+function formatRepoTitle(repoName) {
+  if (!repoName) return "Project";
+  return repoName
+    .replace(/[-_]+/g, ' ')
+    .replace(/\b\w/g, char => char.toUpperCase())
+    .trim();
+}
+
+function detectCategory(repo) {
+  const name = (repo.name || "").toLowerCase();
+  const desc = (repo.description || "").toLowerCase();
+  const lang = (repo.language || "").toLowerCase();
+  const topics = (repo.topics || []).join(' ').toLowerCase();
+  const combined = `${name} ${desc} ${lang} ${topics}`;
+
+  if (combined.includes('game') || combined.includes('fighter') || combined.includes('arcade') || combined.includes('play') || combined.includes('calculator') || combined.includes('watch') || combined.includes('clock') || combined.includes('tool') || combined.includes('qr')) {
+    return { category: "games", categoryLabel: "Game / Tool" };
+  }
+  if (combined.includes('shop') || combined.includes('store') || combined.includes('cart') || combined.includes('ecommerce') || combined.includes('food') || combined.includes('earring') || combined.includes('buy')) {
+    return { category: "ecommerce", categoryLabel: "E-Commerce" };
+  }
+  if (combined.includes('fullstack') || combined.includes('backend') || combined.includes('api') || combined.includes('database') || combined.includes('chat') || combined.includes('companion') || combined.includes('hotel') || combined.includes('library') || combined.includes('bulletin') || combined.includes('aid') || combined.includes('hub') || combined.includes('auth')) {
+    return { category: "fullstack", categoryLabel: "Full-Stack App" };
+  }
+  return { category: "showcase", categoryLabel: "Showcase / Web" };
+}
+
+function detectIcon(repo) {
+  const name = (repo.name || "").toLowerCase();
+  const desc = (repo.description || "").toLowerCase();
+  const combined = `${name} ${desc}`;
+
+  if (combined.includes('game') || combined.includes('fighter')) return "🥊";
+  if (combined.includes('chat') || combined.includes('companion')) return "🤝";
+  if (combined.includes('hotel') || combined.includes('room')) return "🏨";
+  if (combined.includes('event')) return "🎉";
+  if (combined.includes('library') || combined.includes('book')) return "📚";
+  if (combined.includes('shop') || combined.includes('store') || combined.includes('cart')) return "🛍️";
+  if (combined.includes('car') || combined.includes('bmw')) return "🚗";
+  if (combined.includes('earring') || combined.includes('jewelry')) return "👂";
+  if (combined.includes('coffee') || combined.includes('cafe')) return "☕";
+  if (combined.includes('food') || combined.includes('burger')) return "🍔";
+  if (combined.includes('calc')) return "🧮";
+  if (combined.includes('qr')) return "📱";
+  if (combined.includes('watch') || combined.includes('clock')) return "⏰";
+  if (combined.includes('light') || combined.includes('glow')) return "💡";
+  if (combined.includes('job') || combined.includes('apply')) return "📝";
+  if (combined.includes('news') || combined.includes('bulletin')) return "📰";
+  if (combined.includes('hub') || combined.includes('talk')) return "💬";
+  if (combined.includes('port') || combined.includes('bio')) return "💼";
+  return "⚡";
+}
+
+function getLiveUrl(repo) {
+  if (repo.homepage && repo.homepage.trim().length > 0) {
+    return repo.homepage.trim();
+  }
+  if (repo.has_pages) {
+    return `https://${GITHUB_USERNAME}.github.io/${repo.name}/`;
+  }
+  return repo.html_url;
+}
+
+// --- ⚡ Automatic GitHub Live Sync Engine ---
+async function syncWithGitHub(isManual = false) {
+  const syncBadge = document.getElementById("github-sync-indicator");
+  if (syncBadge) {
+    syncBadge.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Syncing with GitHub...`;
+  }
+
+  try {
+    const response = await fetch(GITHUB_REPOS_API);
+    if (!response.ok) {
+      throw new Error(`GitHub API returned status: ${response.status}`);
+    }
+    const repos = await response.json();
+    if (!Array.isArray(repos) || repos.length === 0) return;
+
+    // Filter out profile readme repo or specific utility forks
+    const validRepos = repos.filter(r => r.name !== GITHUB_USERNAME && !r.fork);
+
+    // Map existing curated data for high quality descriptions
+    const baseMap = new Map();
+    baseProjectsData.forEach(p => {
+      baseMap.set(p.name ? p.name.toLowerCase() : p.id.toLowerCase(), p);
+    });
+
+    const liveList = validRepos.map(repo => {
+      const existing = baseMap.get(repo.name.toLowerCase());
+      const catInfo = detectCategory(repo);
+      const liveDemo = getLiveUrl(repo);
+      
+      const tags = [];
+      if (repo.language) tags.push(repo.language);
+      if (repo.topics && Array.isArray(repo.topics)) {
+        repo.topics.slice(0, 3).forEach(t => tags.push(t));
+      }
+      if (tags.length === 0) tags.push("JavaScript", "Web App");
+
+      if (existing) {
+        return {
+          ...existing,
+          title: existing.title || formatRepoTitle(repo.name),
+          liveDemo: existing.liveDemo || liveDemo,
+          github: repo.html_url,
+          pushedAt: repo.pushed_at || repo.updated_at
+        };
+      }
+
+      return {
+        id: repo.name.toLowerCase(),
+        name: repo.name,
+        title: formatRepoTitle(repo.name),
+        category: catInfo.category,
+        categoryLabel: catInfo.categoryLabel,
+        icon: detectIcon(repo),
+        desc: repo.description || `Interactive ${catInfo.categoryLabel} built with modern web technologies.`,
+        longDesc: repo.description || `A modern web application by Priyanshu Kumar. Built with clean code, responsive design, and hosted on GitHub.`,
+        tags: tags,
+        liveDemo: liveDemo,
+        github: repo.html_url,
+        featured: false,
+        pushedAt: repo.pushed_at || repo.updated_at
+      };
+    });
+
+    // Update state and cache
+    projectsData = liveList;
+    localStorage.setItem("pk_github_projects_cache", JSON.stringify(liveList));
+
+    // Re-render UI with latest synced repos
+    renderProjects();
+
+    if (syncBadge) {
+      syncBadge.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #10b981;"></i> Synced with GitHub (${liveList.length} Repos)`;
+    }
+
+    if (isManual) {
+      showToast(`✨ Synced ${liveList.length} projects live from GitHub!`);
+    }
+  } catch (err) {
+    console.warn("GitHub live sync fallback to local cache:", err);
+    if (syncBadge) {
+      syncBadge.innerHTML = `<i class="fa-solid fa-cloud" style="color: var(--primary-light);"></i> ${projectsData.length} Projects Live`;
+    }
+  }
+}
 
 // --- Typing Animation on Tagline ---
 const typingWords = [
@@ -325,13 +515,18 @@ function renderProjects() {
     const matchSearch = !query || 
       proj.title.toLowerCase().includes(query) ||
       proj.desc.toLowerCase().includes(query) ||
-      proj.tags.some(t => t.toLowerCase().includes(query));
+      (proj.tags && proj.tags.some(t => t.toLowerCase().includes(query)));
       
     return matchCategory && matchSearch;
   });
 
   if (projectCountBadge) {
     projectCountBadge.textContent = `${filtered.length}`;
+  }
+
+  const statValEl = document.querySelector(".stat-val");
+  if (statValEl) {
+    statValEl.textContent = `${projectsData.length}+`;
   }
 
   if (filtered.length === 0) {
@@ -350,15 +545,15 @@ function renderProjects() {
       <div class="project-card" data-id="${proj.id}">
         <div>
           <div class="project-card-top">
-            <div class="project-icon-box">${proj.icon}</div>
-            <span class="project-cat-badge">${proj.categoryLabel}</span>
+            <div class="project-icon-box">${proj.icon || '⚡'}</div>
+            <span class="project-cat-badge">${proj.categoryLabel || 'Web App'}</span>
           </div>
           
           <div class="project-details" style="margin-top: 0.85rem;">
             <h3 class="project-title">${proj.title}</h3>
             <p class="project-desc">${proj.desc}</p>
             <div class="project-tags">
-              ${proj.tags.map(tag => `<span class="tag-pill">${tag}</span>`).join('')}
+              ${(proj.tags || []).map(tag => `<span class="tag-pill">${tag}</span>`).join('')}
             </div>
           </div>
         </div>
@@ -408,27 +603,27 @@ function openProjectModal(id) {
   projectModalBody.innerHTML = `
     <div style="display: flex; align-items: center; gap: 0.85rem; margin-bottom: 1rem;">
       <div style="font-size: 2.5rem; width: 54px; height: 54px; background: rgba(255,255,255,0.06); border-radius: 14px; display: flex; align-items: center; justify-content: center;">
-        ${proj.icon}
+        ${proj.icon || '⚡'}
       </div>
       <div>
         <h2 style="font-family: var(--font-heading); font-size: 1.35rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.2rem;">
           ${proj.title}
         </h2>
-        <span class="project-cat-badge">${proj.categoryLabel}</span>
+        <span class="project-cat-badge">${proj.categoryLabel || 'Project'}</span>
       </div>
     </div>
 
     <div style="margin-bottom: 1.25rem;">
       <h4 style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.4rem; letter-spacing: 0.05em;">Overview</h4>
       <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
-        ${proj.longDesc}
+        ${proj.longDesc || proj.desc}
       </p>
     </div>
 
     <div style="margin-bottom: 1.5rem;">
       <h4 style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.5rem; letter-spacing: 0.05em;">Tech Stack & Highlights</h4>
       <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
-        ${proj.tags.map(tag => `<span class="skill-pill" style="font-size: 0.76rem; padding: 0.3rem 0.65rem;"><i class="fa-solid fa-code"></i> ${tag}</span>`).join('')}
+        ${(proj.tags || []).map(tag => `<span class="skill-pill" style="font-size: 0.76rem; padding: 0.3rem 0.65rem;"><i class="fa-solid fa-code"></i> ${tag}</span>`).join('')}
       </div>
     </div>
 
@@ -481,6 +676,22 @@ function openShareModal() {
 function closeShareModal() {
   if (shareModalOverlay) {
     shareModalOverlay.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+}
+
+// --- Digital Resume Modal ---
+const resumeModalOverlay = document.getElementById("resume-modal-overlay");
+
+function openResumeModal() {
+  if (!resumeModalOverlay) return;
+  resumeModalOverlay.classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeResumeModal() {
+  if (resumeModalOverlay) {
+    resumeModalOverlay.classList.remove("active");
     document.body.style.overflow = "";
   }
 }
@@ -591,22 +802,6 @@ function sendWhatsAppPrompt(promptType) {
   window.open(`https://wa.me/${phoneNumber}?text=${encoded}`, "_blank");
 }
 
-// --- Digital Resume Modal ---
-const resumeModalOverlay = document.getElementById("resume-modal-overlay");
-
-function openResumeModal() {
-  if (!resumeModalOverlay) return;
-  resumeModalOverlay.classList.add("active");
-  document.body.style.overflow = "hidden";
-}
-
-function closeResumeModal() {
-  if (resumeModalOverlay) {
-    resumeModalOverlay.classList.remove("active");
-    document.body.style.overflow = "";
-  }
-}
-
 // --- Close Modals on Backdrop / ESC Key ---
 window.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
@@ -628,8 +823,10 @@ window.addEventListener("keydown", (e) => {
   }
 });
 
-// --- Initialize Page ---
+// --- Initialize Page & Live GitHub Sync ---
 document.addEventListener("DOMContentLoaded", () => {
   typeEffect();
   renderProjects();
+  // Automatically fetch any new GitHub repositories in real-time
+  syncWithGitHub();
 });
