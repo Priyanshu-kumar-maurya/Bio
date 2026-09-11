@@ -1,14 +1,17 @@
 /* ==========================================================================
-   INSTAGRAM BIO LINK-IN-BIO & DEVELOPER HUB - JAVASCRIPT
+   INSTAGRAM BIO LINK-IN-BIO & DEVELOPER HUB - JAVASCRIPT (PRO EDITION)
    Author: Priyanshu Kumar (GitHub: Priyanshu-kumar-maurya)
-   ⚡ 100% AUTOMATIC GITHUB SYNC ENGINE:
-   Automatically fetches & displays all new repositories from GitHub in Real-Time!
+   WhatsApp: +91 7232992082
+   ⚡ Real-Time GitHub Sync, Live IST Clock, Custom WhatsApp Messenger,
+      Audio FX, Interactive Modals, QR Generator & Dynamic Filtering
    ========================================================================== */
 
 const GITHUB_USERNAME = "Priyanshu-kumar-maurya";
+const WHATSAPP_NUMBER = "917232992082"; // User's Official WhatsApp: +91 7232992082
 const GITHUB_REPOS_API = `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`;
+const GITHUB_USER_API = `https://api.github.com/users/${GITHUB_USERNAME}`;
 
-// --- Curated Base Projects Database (Instant Cache & Fallback) ---
+// --- Curated Base Projects Database (Instant 0ms Cache & Fallback) ---
 const baseProjectsData = [
   {
     id: "typing-fighter-game",
@@ -292,7 +295,7 @@ const baseProjectsData = [
   }
 ];
 
-// Active Projects Array (Loaded from Cache or Base, and dynamically updated by GitHub API)
+// Active Projects Array
 let projectsData = [...baseProjectsData];
 
 // Load previously cached GitHub sync data if available
@@ -308,7 +311,7 @@ if (cachedProjects) {
   }
 }
 
-// --- Smart Helpers for Dynamically Detected GitHub Repositories ---
+// --- Smart Helpers for GitHub Repositories ---
 
 function formatRepoTitle(repoName) {
   if (!repoName) return "Project";
@@ -388,8 +391,12 @@ async function syncWithGitHub(isManual = false) {
     const repos = await response.json();
     if (!Array.isArray(repos) || repos.length === 0) return;
 
-    // Filter out profile readme repo or specific utility forks
-    const validRepos = repos.filter(r => r.name !== GITHUB_USERNAME && !r.fork);
+    // Filter out profile readme repo, 'Bio' itself, and forks
+    const validRepos = repos.filter(r => 
+      r.name !== GITHUB_USERNAME && 
+      r.name.toLowerCase() !== 'bio' && 
+      !r.fork
+    );
 
     // Map existing curated data for high quality descriptions
     const baseMap = new Map();
@@ -427,7 +434,7 @@ async function syncWithGitHub(isManual = false) {
         categoryLabel: catInfo.categoryLabel,
         icon: detectIcon(repo),
         desc: repo.description || `Interactive ${catInfo.categoryLabel} built with modern web technologies.`,
-        longDesc: repo.description || `A modern web application by Priyanshu Kumar. Built with clean code, responsive design, and hosted on GitHub.`,
+        longDesc: repo.description || `A modern web application created by Priyanshu Kumar. Built with clean code, responsive design, and hosted on GitHub.`,
         tags: tags,
         liveDemo: liveDemo,
         github: repo.html_url,
@@ -442,12 +449,14 @@ async function syncWithGitHub(isManual = false) {
 
     // Re-render UI with latest synced repos
     renderProjects();
+    updateCategoryCounts();
 
     if (syncBadge) {
       syncBadge.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #10b981;"></i> Synced with GitHub (${liveList.length} Repos)`;
     }
 
     if (isManual) {
+      playTone(659.25, 'triangle', 0.12);
       showToast(`✨ Synced ${liveList.length} projects live from GitHub!`);
     }
   } catch (err) {
@@ -456,6 +465,66 @@ async function syncWithGitHub(isManual = false) {
       syncBadge.innerHTML = `<i class="fa-solid fa-cloud" style="color: var(--primary-light);"></i> ${projectsData.length} Projects Live`;
     }
   }
+}
+
+// --- Live Indian Standard Time (IST) Clock ---
+function updateLiveClock() {
+  const clockEl = document.getElementById("live-ist-clock");
+  if (!clockEl) return;
+  try {
+    const options = {
+      timeZone: "Asia/Kolkata",
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    };
+    const timeStr = new Intl.DateTimeFormat('en-US', options).format(new Date());
+    clockEl.textContent = `${timeStr} IST`;
+  } catch (e) {
+    clockEl.textContent = new Date().toLocaleTimeString();
+  }
+}
+
+// --- Fetch Live GitHub Profile Stats ---
+async function fetchGitHubUserStats() {
+  try {
+    const res = await fetch(GITHUB_USER_API);
+    if (!res.ok) return;
+    const data = await res.json();
+    const reposCountEl = document.getElementById("stat-repos-count");
+    if (reposCountEl && data.public_repos) {
+      reposCountEl.textContent = `${data.public_repos}+`;
+    }
+    const followersEl = document.getElementById("stat-followers-count");
+    if (followersEl && typeof data.followers === 'number') {
+      followersEl.textContent = `${data.followers}`;
+    }
+  } catch (e) {
+    // Graceful fallback to cached stats
+  }
+}
+
+// --- Category Counts Update ---
+function updateCategoryCounts() {
+  const counts = {
+    all: projectsData.length,
+    fullstack: projectsData.filter(p => p.category === 'fullstack').length,
+    ecommerce: projectsData.filter(p => p.category === 'ecommerce').length,
+    games: projectsData.filter(p => p.category === 'games').length,
+    showcase: projectsData.filter(p => p.category === 'showcase').length
+  };
+
+  const tabs = document.querySelectorAll(".filter-tab");
+  tabs.forEach(tab => {
+    const cat = tab.dataset.category || "all";
+    let baseText = tab.getAttribute("data-original-label");
+    if (!baseText) {
+      baseText = tab.textContent.trim().replace(/\s*\(\d+\)$/, '');
+      tab.setAttribute("data-original-label", baseText);
+    }
+    tab.innerHTML = `${baseText} <span class="tab-count-badge">${counts[cat] || 0}</span>`;
+  });
 }
 
 // --- Typing Animation on Tagline ---
@@ -501,6 +570,7 @@ function typeEffect() {
 const projectsGrid = document.getElementById("projects-grid");
 const projectCountBadge = document.getElementById("project-count-badge");
 const searchInput = document.getElementById("search-input");
+const searchClearBtn = document.getElementById("search-clear-btn");
 const filterTabs = document.querySelectorAll(".filter-tab");
 
 let currentCategory = "all";
@@ -524,7 +594,7 @@ function renderProjects() {
     projectCountBadge.textContent = `${filtered.length}`;
   }
 
-  const statValEl = document.querySelector(".stat-val");
+  const statValEl = document.getElementById("stat-repos-count");
   if (statValEl) {
     statValEl.textContent = `${projectsData.length}+`;
   }
@@ -534,7 +604,8 @@ function renderProjects() {
       <div style="grid-column: 1/-1; text-align: center; padding: 2.5rem 1rem; color: var(--text-muted);">
         <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">🔍</div>
         <p style="font-weight: 600; color: var(--text-main);">No matching projects found</p>
-        <p style="font-size: 0.8rem;">Try searching for another keyword or change category filter.</p>
+        <p style="font-size: 0.8rem; margin-bottom: 0.8rem;">Try searching for another keyword or change category filter.</p>
+        <button class="top-btn" onclick="clearSearch()" style="padding: 0.45rem 1rem;">Clear Search</button>
       </div>
     `;
     return;
@@ -559,10 +630,10 @@ function renderProjects() {
         </div>
 
         <div class="project-actions">
-          <a href="${proj.liveDemo}" target="_blank" rel="noopener noreferrer" class="btn-card btn-card-primary" title="Open Live Project">
+          <a href="${proj.liveDemo}" target="_blank" rel="noopener noreferrer" class="btn-card btn-card-primary" title="Open Live Project" onclick="playTone(523.25, 'sine', 0.06)">
             <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo
           </a>
-          <a href="${proj.github}" target="_blank" rel="noopener noreferrer" class="btn-card btn-card-secondary" title="View Source Code on GitHub">
+          <a href="${proj.github}" target="_blank" rel="noopener noreferrer" class="btn-card btn-card-secondary" title="View Source Code on GitHub" onclick="playTone(440, 'sine', 0.06)">
             <i class="fa-brands fa-github"></i> Code
           </a>
           <button class="btn-card btn-card-info" onclick="openProjectModal('${proj.id}')" title="Quick Details">
@@ -577,6 +648,7 @@ function renderProjects() {
 // --- Category Filter Tabs Listener ---
 filterTabs.forEach(tab => {
   tab.addEventListener("click", () => {
+    playTone(440, 'sine', 0.06);
     filterTabs.forEach(t => t.classList.remove("active"));
     tab.classList.add("active");
     currentCategory = tab.dataset.category || "all";
@@ -584,12 +656,26 @@ filterTabs.forEach(tab => {
   });
 });
 
-// --- Search Input Listener ---
+// --- Search Input Listener & Clear Button ---
 if (searchInput) {
   searchInput.addEventListener("input", (e) => {
     searchQuery = e.target.value;
+    if (searchClearBtn) {
+      searchClearBtn.style.display = searchQuery ? "flex" : "none";
+    }
     renderProjects();
   });
+}
+
+function clearSearch() {
+  if (searchInput) {
+    searchInput.value = "";
+    searchQuery = "";
+    if (searchClearBtn) searchClearBtn.style.display = "none";
+    renderProjects();
+    searchInput.focus();
+    playTone(330, 'sine', 0.08);
+  }
 }
 
 // --- Project Details Modal ---
@@ -597,6 +683,7 @@ const projectModalOverlay = document.getElementById("project-modal-overlay");
 const projectModalBody = document.getElementById("project-modal-body");
 
 function openProjectModal(id) {
+  playTone(523.25, 'triangle', 0.08);
   const proj = projectsData.find(p => p.id === id);
   if (!proj || !projectModalBody || !projectModalOverlay) return;
 
@@ -654,6 +741,7 @@ const qrCanvasContainer = document.getElementById("qr-canvas-container");
 const shareUrlInput = document.getElementById("share-url-input");
 
 function openShareModal() {
+  playTone(587.33, 'sine', 0.08);
   if (!shareModalOverlay) return;
   
   const currentUrl = window.location.href;
@@ -684,6 +772,7 @@ function closeShareModal() {
 const resumeModalOverlay = document.getElementById("resume-modal-overlay");
 
 function openResumeModal() {
+  playTone(659.25, 'sine', 0.08);
   if (!resumeModalOverlay) return;
   resumeModalOverlay.classList.add("active");
   document.body.style.overflow = "hidden";
@@ -714,6 +803,7 @@ function handleNativeShare() {
 
 // --- Clipboard Copy with Toast ---
 function copyToClipboard(text, successMsg = "Copied to clipboard! 🚀") {
+  playTone(880, 'sine', 0.08);
   navigator.clipboard.writeText(text).then(() => {
     showToast(successMsg);
   }).catch(() => {
@@ -725,6 +815,10 @@ function copyToClipboard(text, successMsg = "Copied to clipboard! 🚀") {
     document.body.removeChild(textArea);
     showToast(successMsg);
   });
+}
+
+function copyPhoneNumber() {
+  copyToClipboard("+91 7232992082", "WhatsApp Number Copied: +91 7232992082 📲");
 }
 
 function showToast(message) {
@@ -741,7 +835,7 @@ function showToast(message) {
 
   setTimeout(() => {
     toast.classList.remove("show");
-  }, 3000);
+  }, 3200);
 }
 
 // --- Theme Selector Logic ---
@@ -753,6 +847,7 @@ if (themeBtn && themeMenu) {
   themeBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     themeMenu.classList.toggle("active");
+    playTone(440, 'sine', 0.05);
   });
 
   document.addEventListener("click", () => {
@@ -770,6 +865,7 @@ themeOptions.forEach(opt => {
     }
     localStorage.setItem("pk_bio_theme", selectedTheme);
     if (themeMenu) themeMenu.classList.remove("active");
+    playTone(783.99, 'triangle', 0.1);
     showToast(`Theme updated: ${opt.textContent.trim()} ✨`);
   });
 });
@@ -779,9 +875,49 @@ if (savedTheme && savedTheme !== "violet") {
   document.documentElement.setAttribute("data-theme", savedTheme);
 }
 
-// --- WhatsApp Quick Prompt Dispatcher ---
+// --- Sound Effects Web Audio API Synthesizer ---
+let soundEnabled = false;
+
+function toggleSound() {
+  soundEnabled = !soundEnabled;
+  const soundBtn = document.getElementById("sound-btn");
+  if (soundBtn) {
+    soundBtn.innerHTML = soundEnabled 
+      ? '<i class="fa-solid fa-volume-high"></i>' 
+      : '<i class="fa-solid fa-volume-xmark"></i>';
+    soundBtn.title = soundEnabled ? "Sound ON (Tap to Mute)" : "Sound Muted (Tap to Unmute)";
+  }
+  if (soundEnabled) {
+    playTone(659.25, 'triangle', 0.12);
+  }
+  showToast(soundEnabled ? "Futuristic UI Sound: ON 🔊" : "Futuristic UI Sound: OFF 🔇");
+}
+
+function playTone(freq, type = 'sine', duration = 0.08) {
+  if (!soundEnabled) return;
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    const ctx = new AudioCtx();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, ctx.currentTime);
+    gain.gain.setValueAtTime(0.04, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + duration);
+  } catch (e) {
+    // Audio context not allowed or unsupported
+  }
+}
+
+// --- WhatsApp Messenger Integration (+91 7232992082) ---
+
 function sendWhatsAppPrompt(promptType) {
-  const phoneNumber = "918858003033";
+  playTone(523.25, 'sine', 0.08);
   let message = "";
 
   switch (promptType) {
@@ -794,12 +930,43 @@ function sendWhatsAppPrompt(promptType) {
     case "freelance":
       message = "Hey Priyanshu! I need a modern website built. Can we discuss requirements, timeline and pricing?";
       break;
+    case "hello":
+      message = "Hi Priyanshu! 👋 Reaching out from your Instagram bio portfolio page. Loved your projects!";
+      break;
     default:
       message = "Hi Priyanshu! Reaching out from your Instagram bio portfolio page.";
   }
 
+  const customInput = document.getElementById("custom-wa-input");
+  if (customInput) {
+    customInput.value = message;
+  }
+
   const encoded = encodeURIComponent(message);
-  window.open(`https://wa.me/${phoneNumber}?text=${encoded}`, "_blank");
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`, "_blank");
+}
+
+function sendCustomWhatsApp() {
+  playTone(659.25, 'triangle', 0.1);
+  const customInput = document.getElementById("custom-wa-input");
+  const message = (customInput && customInput.value.trim()) 
+    ? customInput.value.trim() 
+    : "Hello Priyanshu! Reaching out from your Instagram bio portfolio hub.";
+
+  const encoded = encodeURIComponent(message);
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`, "_blank");
+}
+
+// --- Interactive Ambient Glow Follower ---
+function initGlowFollower() {
+  const orb = document.querySelector(".orb-1");
+  if (!orb) return;
+
+  window.addEventListener("pointermove", (e) => {
+    const x = (e.clientX / window.innerWidth) * 40 - 20;
+    const y = (e.clientY / window.innerHeight) * 40 - 20;
+    orb.style.transform = `translate(${x}px, ${y}px)`;
+  }, { passive: true });
 }
 
 // --- Close Modals on Backdrop / ESC Key ---
@@ -823,10 +990,16 @@ window.addEventListener("keydown", (e) => {
   }
 });
 
-// --- Initialize Page & Live GitHub Sync ---
+// --- Initialize Page & Live Features ---
 document.addEventListener("DOMContentLoaded", () => {
   typeEffect();
   renderProjects();
-  // Automatically fetch any new GitHub repositories in real-time
+  updateCategoryCounts();
+  updateLiveClock();
+  setInterval(updateLiveClock, 1000);
+  initGlowFollower();
+  
+  // Real-time background sync with GitHub API
   syncWithGitHub();
+  fetchGitHubUserStats();
 });
