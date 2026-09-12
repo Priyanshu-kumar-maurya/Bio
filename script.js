@@ -530,9 +530,10 @@ function updateCategoryCounts() {
 // --- Typing Animation on Tagline ---
 const typingWords = [
   "Frontend & Full-Stack Developer",
+  "Priyanshu Kumar Maurya",
   "React.js & JavaScript Builder",
-  "Creative UI/UX Designer",
-  "Web Performance Enthusiast"
+  "@codexs_priyanshu on Instagram",
+  "Creative UI/UX Designer"
 ];
 
 let wordIndex = 0;
