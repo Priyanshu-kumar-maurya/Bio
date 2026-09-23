@@ -530,6 +530,69 @@
     </div>
   </div>
 
+  <!-- 4. Vercel-Style Live Project Preview Simulator Modal -->
+  <div class="modal-overlay preview-modal-overlay" id="preview-modal-overlay">
+    <div class="modal-content preview-modal-content" id="preview-modal-container">
+      
+      <!-- Simulated Developer Browser Header -->
+      <div class="browser-header">
+        <div class="browser-window-controls">
+          <span class="browser-dot dot-close" onclick="closePreviewModal()" title="Close Simulator"></span>
+          <span class="browser-dot dot-minimize" onclick="minimizePreviewModal()" title="Minimize"></span>
+          <span class="browser-dot dot-maximize" onclick="togglePreviewFullscreen()" title="Fullscreen / Expand"></span>
+        </div>
+
+        <div class="browser-address-bar">
+          <i class="fa-solid fa-lock browser-lock-icon"></i>
+          <span class="browser-url-text" id="preview-browser-url">https://vercel.com</span>
+          <button class="browser-action-icon" onclick="refreshPreviewIframe()" title="Reload Preview">
+            <i class="fa-solid fa-arrows-rotate"></i>
+          </button>
+        </div>
+
+        <div class="browser-device-controls">
+          <button class="device-btn active" id="btn-device-desktop" onclick="setPreviewDevice('desktop')" title="Desktop View (100%)">
+            <i class="fa-solid fa-desktop"></i>
+          </button>
+          <button class="device-btn" id="btn-device-tablet" onclick="setPreviewDevice('tablet')" title="Tablet View (768px)">
+            <i class="fa-solid fa-tablet-screen-button"></i>
+          </button>
+          <button class="device-btn" id="btn-device-mobile" onclick="setPreviewDevice('mobile')" title="Mobile iPhone View (375px)">
+            <i class="fa-solid fa-mobile-screen"></i>
+          </button>
+          <a href="#" target="_blank" rel="noopener noreferrer" id="preview-external-link" class="device-btn external-btn" title="Open Full App in New Tab">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Browser Viewport Frame -->
+      <div class="browser-viewport" id="browser-viewport">
+        <!-- Live Loading Spinner -->
+        <div class="preview-loader" id="preview-loader">
+          <div class="preview-spinner"></div>
+          <span id="preview-loading-title">Connecting to live project...</span>
+        </div>
+
+        <!-- Embedded Interactive Iframe -->
+        <iframe id="preview-iframe" class="preview-iframe" src="" title="Live Project Preview" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" loading="lazy"></iframe>
+
+        <!-- Fallback Security Notice if iframe embedding restricted -->
+        <div class="preview-fallback-banner" id="preview-fallback-banner" style="display: none;">
+          <div class="fallback-icon">🛡️</div>
+          <p class="fallback-title" id="fallback-proj-name">Live Project Ready</p>
+          <p class="fallback-desc">
+            This application is live and hosted. Some browsers restrict iframes for external domain cookies — tap below to launch full interactive app in a standalone window!
+          </p>
+          <a href="#" target="_blank" rel="noopener noreferrer" id="preview-fallback-btn" class="btn-card btn-card-primary" style="padding: 0.65rem 1.4rem; display: inline-flex; border-radius: var(--radius-full);">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Live App Directly
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- Script -->
   <script src="script.js"></script>
 </body>

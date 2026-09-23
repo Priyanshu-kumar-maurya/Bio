@@ -577,6 +577,24 @@ const filterTabs = document.querySelectorAll(".filter-tab");
 let currentCategory = "all";
 let searchQuery = "";
 
+// --- Clean Domain Helper for Vercel-Style Badges ---
+function cleanDomain(url) {
+  if (!url) return "app.live";
+  try {
+    const parsed = new URL(url);
+    let host = parsed.hostname.replace(/^www\./, '');
+    if (parsed.pathname && parsed.pathname.length > 1 && !host.includes('vercel.app')) {
+      const cleanPath = parsed.pathname.replace(/\/$/, '');
+      if (cleanPath.length < 24) {
+        return `${host}${cleanPath}`;
+      }
+    }
+    return host;
+  } catch (e) {
+    return url.replace(/^https?:\/\//, '').split('/')[0];
+  }
+}
+
 function renderProjects() {
   if (!projectsGrid) return;
   
@@ -613,15 +631,40 @@ function renderProjects() {
   }
 
   projectsGrid.innerHTML = filtered.map(proj => {
+    const domainText = cleanDomain(proj.liveDemo);
     return `
       <div class="project-card" data-id="${proj.id}">
         <div>
-          <div class="project-card-top">
-            <div class="project-icon-box">${proj.icon || '⚡'}</div>
-            <span class="project-cat-badge">${proj.categoryLabel || 'Web App'}</span>
+          <!-- Vercel-Style Product Preview Stage -->
+          <div class="product-preview-stage" onclick="openLivePreview('${proj.id}')" title="Test Live Interactive Preview">
+            <div class="preview-stage-header">
+              <div class="stage-dots">
+                <span class="stage-dot dot-red"></span>
+                <span class="stage-dot dot-yellow"></span>
+                <span class="stage-dot dot-green"></span>
+              </div>
+              <div class="stage-domain">
+                <i class="fa-solid fa-lock" style="font-size: 0.65rem;"></i>
+                <span>${domainText}</span>
+              </div>
+              <div class="stage-status">
+                <span class="status-pulse-green"></span>
+                <span>Ready</span>
+              </div>
+            </div>
+            <div class="preview-stage-screen">
+              <div class="stage-bg-art">
+                <span class="stage-big-icon">${proj.icon || '⚡'}</span>
+                <span class="stage-proj-badge">${proj.categoryLabel || 'Web App'}</span>
+              </div>
+              <div class="stage-hover-overlay">
+                <span class="stage-play-btn"><i class="fa-solid fa-play"></i> Live Preview</span>
+                <span class="stage-sub-hint">Interactive Simulator</span>
+              </div>
+            </div>
           </div>
-          
-          <div class="project-details" style="margin-top: 0.85rem;">
+
+          <div class="project-details">
             <h3 class="project-title">${proj.title}</h3>
             <p class="project-desc">${proj.desc}</p>
             <div class="project-tags">
@@ -631,13 +674,16 @@ function renderProjects() {
         </div>
 
         <div class="project-actions">
-          <a href="${proj.liveDemo}" target="_blank" rel="noopener noreferrer" class="btn-card btn-card-primary" title="Open Live Project" onclick="playTone(523.25, 'sine', 0.06)">
-            <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo
+          <button class="btn-card btn-card-preview" onclick="openLivePreview('${proj.id}')" title="Test Live App Inside Page">
+            <i class="fa-solid fa-play"></i> Preview
+          </button>
+          <a href="${proj.liveDemo}" target="_blank" rel="noopener noreferrer" class="btn-card btn-card-primary" title="Open Live Project in New Tab" onclick="playTone(523.25, 'sine', 0.06)">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Open
           </a>
           <a href="${proj.github}" target="_blank" rel="noopener noreferrer" class="btn-card btn-card-secondary" title="View Source Code on GitHub" onclick="playTone(440, 'sine', 0.06)">
             <i class="fa-brands fa-github"></i> Code
           </a>
-          <button class="btn-card btn-card-info" onclick="openProjectModal('${proj.id}')" title="Quick Details">
+          <button class="btn-card btn-card-info" onclick="openProjectModal('${proj.id}')" title="Project Details">
             <i class="fa-solid fa-circle-info"></i>
           </button>
         </div>
@@ -783,6 +829,149 @@ function closeResumeModal() {
   if (resumeModalOverlay) {
     resumeModalOverlay.classList.remove("active");
     document.body.style.overflow = "";
+  }
+}
+
+// --- Vercel-Style Live Project Preview Simulator Modal ---
+const previewModalOverlay = document.getElementById("preview-modal-overlay");
+const previewModalContainer = document.getElementById("preview-modal-container");
+const previewIframe = document.getElementById("preview-iframe");
+const previewBrowserUrl = document.getElementById("preview-browser-url");
+const previewExternalLink = document.getElementById("preview-external-link");
+const previewLoader = document.getElementById("preview-loader");
+const previewLoadingTitle = document.getElementById("preview-loading-title");
+const previewFallbackBanner = document.getElementById("preview-fallback-banner");
+const fallbackProjName = document.getElementById("fallback-proj-name");
+const previewFallbackBtn = document.getElementById("preview-fallback-btn");
+let previewFallbackTimeout = null;
+
+function openLivePreview(id) {
+  playTone(523.25, 'triangle', 0.1);
+  const proj = projectsData.find(p => p.id === id);
+  if (!proj || !previewModalOverlay) return;
+
+  const targetUrl = proj.liveDemo || proj.github;
+
+  if (previewBrowserUrl) {
+    previewBrowserUrl.textContent = targetUrl;
+  }
+  if (previewExternalLink) {
+    previewExternalLink.href = targetUrl;
+  }
+  if (previewFallbackBtn) {
+    previewFallbackBtn.href = targetUrl;
+  }
+  if (fallbackProjName) {
+    fallbackProjName.textContent = proj.title;
+  }
+
+  // Reset to desktop view and standard window size
+  setPreviewDevice('desktop');
+  if (previewModalContainer) {
+    previewModalContainer.classList.remove("fullscreen");
+  }
+
+  // Reset states & show loader
+  if (previewFallbackBanner) {
+    previewFallbackBanner.style.display = "none";
+  }
+  if (previewLoader) {
+    previewLoader.style.display = "flex";
+  }
+  if (previewLoadingTitle) {
+    previewLoadingTitle.textContent = `Connecting to ${cleanDomain(targetUrl)}...`;
+  }
+
+  // Clear previous timer
+  if (previewFallbackTimeout) {
+    clearTimeout(previewFallbackTimeout);
+  }
+
+  if (previewIframe) {
+    previewIframe.onload = () => {
+      if (previewLoader) previewLoader.style.display = "none";
+      if (previewFallbackTimeout) clearTimeout(previewFallbackTimeout);
+    };
+
+    // 7s fallback notice if external domain restricts iframe embedding
+    previewFallbackTimeout = setTimeout(() => {
+      if (previewLoader) previewLoader.style.display = "none";
+      if (previewFallbackBanner) previewFallbackBanner.style.display = "flex";
+    }, 7000);
+
+    previewIframe.src = targetUrl;
+  }
+
+  previewModalOverlay.classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closePreviewModal() {
+  playTone(392, 'sine', 0.08);
+  if (previewFallbackTimeout) {
+    clearTimeout(previewFallbackTimeout);
+  }
+  if (previewModalOverlay) {
+    previewModalOverlay.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+  // Terminate background media/audio/canvas loops
+  if (previewIframe) {
+    previewIframe.src = "about:blank";
+  }
+  if (previewLoader) {
+    previewLoader.style.display = "none";
+  }
+  if (previewFallbackBanner) {
+    previewFallbackBanner.style.display = "none";
+  }
+}
+
+function minimizePreviewModal() {
+  closePreviewModal();
+}
+
+function refreshPreviewIframe() {
+  playTone(440, 'sine', 0.06);
+  if (!previewIframe || !previewIframe.src || previewIframe.src === "about:blank") return;
+  const currentSrc = previewIframe.src;
+  if (previewLoader) previewLoader.style.display = "flex";
+  if (previewFallbackBanner) previewFallbackBanner.style.display = "none";
+  previewIframe.src = "about:blank";
+  setTimeout(() => {
+    previewIframe.src = currentSrc;
+  }, 120);
+}
+
+function setPreviewDevice(mode) {
+  playTone(493.88, 'sine', 0.06);
+  const desktopBtn = document.getElementById("btn-device-desktop");
+  const tabletBtn = document.getElementById("btn-device-tablet");
+  const mobileBtn = document.getElementById("btn-device-mobile");
+
+  [desktopBtn, tabletBtn, mobileBtn].forEach(b => {
+    if (b) b.classList.remove("active");
+  });
+
+  if (previewModalContainer) {
+    previewModalContainer.classList.remove("device-tablet", "device-mobile");
+  }
+
+  if (mode === 'mobile') {
+    if (mobileBtn) mobileBtn.classList.add("active");
+    if (previewModalContainer) previewModalContainer.classList.add("device-mobile");
+  } else if (mode === 'tablet') {
+    if (tabletBtn) tabletBtn.classList.add("active");
+    if (previewModalContainer) previewModalContainer.classList.add("device-tablet");
+  } else {
+    if (desktopBtn) desktopBtn.classList.add("active");
+  }
+}
+
+function togglePreviewFullscreen() {
+  playTone(587.33, 'sine', 0.08);
+  if (previewModalContainer) {
+    previewModalContainer.classList.toggle("fullscreen");
   }
 }
 
@@ -976,16 +1165,18 @@ window.addEventListener("keydown", (e) => {
     closeProjectModal();
     closeShareModal();
     closeResumeModal();
+    closePreviewModal();
   }
 });
 
-[projectModalOverlay, shareModalOverlay, resumeModalOverlay].forEach(overlay => {
+[projectModalOverlay, shareModalOverlay, resumeModalOverlay, previewModalOverlay].forEach(overlay => {
   if (overlay) {
     overlay.addEventListener("click", (e) => {
       if (e.target === overlay) {
         closeProjectModal();
         closeShareModal();
         closeResumeModal();
+        closePreviewModal();
       }
     });
   }
