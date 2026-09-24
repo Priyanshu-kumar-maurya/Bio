@@ -1096,12 +1096,34 @@ body {
 
 .preview-stage-screen {
   position: relative;
-  height: 98px;
+  height: 140px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at 50% 20%, rgba(139, 92, 246, 0.16), rgba(11, 15, 25, 0.95));
+  background: #090d16;
   overflow: hidden;
+}
+
+@media (max-width: 480px) {
+  .preview-stage-screen {
+    height: 130px;
+  }
+}
+
+.stage-screenshot-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.35s ease, filter 0.35s ease;
+  filter: brightness(0.95) contrast(1.05);
+}
+
+.product-preview-stage:hover .stage-screenshot-img {
+  transform: scale(1.06);
+  filter: brightness(0.6);
 }
 
 .stage-bg-art {
@@ -1111,20 +1133,6 @@ body {
   justify-content: center;
   gap: 0.25rem;
   transition: transform 0.25s ease-out;
-}
-
-.stage-big-icon {
-  font-size: 2.2rem;
-  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
-}
-
-.stage-proj-badge {
-  font-size: 0.65rem;
-  font-family: var(--font-mono);
-  color: var(--primary-light);
-  background: rgba(255, 255, 255, 0.06);
-  padding: 0.1rem 0.45rem;
-  border-radius: var(--radius-full);
 }
 
 .stage-hover-overlay {

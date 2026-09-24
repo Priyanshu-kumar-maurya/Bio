@@ -595,6 +595,21 @@ function cleanDomain(url) {
   }
 }
 
+// --- Dynamic Project Preview Screenshot Path & Fallback Helper ---
+function getProjectPreviewImage(proj) {
+  if (proj.previewImg) return proj.previewImg;
+  const isRootDir = window.location.pathname.endsWith("bio.html");
+  const prefix = isRootDir ? "bio/previews/" : "previews/";
+  return `${prefix}${proj.id}.jpg`;
+}
+
+function handlePreviewImgError(img, targetUrl) {
+  if (!img.dataset.hasFailed) {
+    img.dataset.hasFailed = "true";
+    img.src = `https://s0.wp.com/mshots/v1/${encodeURIComponent(targetUrl)}?w=800&h=500`;
+  }
+}
+
 function renderProjects() {
   if (!projectsGrid) return;
   
@@ -632,6 +647,9 @@ function renderProjects() {
 
   projectsGrid.innerHTML = filtered.map(proj => {
     const domainText = cleanDomain(proj.liveDemo);
+    const previewSrc = getProjectPreviewImage(proj);
+    const targetUrl = proj.liveDemo || proj.github;
+
     return `
       <div class="project-card" data-id="${proj.id}">
         <div>
@@ -653,10 +671,13 @@ function renderProjects() {
               </div>
             </div>
             <div class="preview-stage-screen">
-              <div class="stage-bg-art">
-                <span class="stage-big-icon">${proj.icon || '⚡'}</span>
-                <span class="stage-proj-badge">${proj.categoryLabel || 'Web App'}</span>
-              </div>
+              <img 
+                class="stage-screenshot-img" 
+                src="${previewSrc}" 
+                alt="${proj.title} Web Preview" 
+                loading="lazy" 
+                onerror="handlePreviewImgError(this, '${targetUrl}')"
+              />
               <div class="stage-hover-overlay">
                 <span class="stage-play-btn"><i class="fa-solid fa-play"></i> Live Preview</span>
                 <span class="stage-sub-hint">Interactive Simulator</span>
