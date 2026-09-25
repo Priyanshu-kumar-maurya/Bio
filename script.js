@@ -16,13 +16,20 @@ const baseProjectsData = [
   {
     id: "typing-fighter-game",
     name: "typing-fighter-game",
-    title: "Typing Fighter Game",
+    title: "Typing Fighter - Cyber Combat Arena",
     category: "games",
-    categoryLabel: "Game / Arcade",
+    categoryLabel: "Arcade Combat",
+    badgeText: "⚡ PWA Combat",
     icon: "🥊",
-    desc: "Fast-paced arcade speed typing combat game with combos, power-ups, retro audio, and PWA support.",
-    longDesc: "An adrenaline-fueled typing battle game where words typed unleash fighting combos and counter-attacks. Features smooth canvas animations, score multipliers, difficulty curves, and installable PWA support.",
-    tags: ["JavaScript", "HTML5 Canvas", "PWA", "Game Dev", "Audio API"],
+    desc: "High-octane arcade combat game driven by typing speed, fighting combos, power-ups, retro audio, and PWA offline capability.",
+    longDesc: "An adrenaline-fueled typing battle web game where fast, accurate typing unleashes fighting combos, counter-attacks, and special moves. Built with HTML5 Canvas physics, score multipliers, procedural sound synthesis, and installable PWA support for 100% offline gameplay.",
+    features: [
+      "Real-Time 1v1 Arena Combat",
+      "Canvas Particle Animations & Power-ups",
+      "Dynamic Combos & Difficulty Scaling",
+      "100% Offline PWA Home-Screen Installable"
+    ],
+    tags: ["JavaScript", "HTML5 Canvas", "PWA Offline", "Web Audio API", "Game Engine"],
     liveDemo: "https://typing-fighter-game.vercel.app",
     github: "https://github.com/Priyanshu-kumar-maurya/typing-fighter-game",
     featured: true
@@ -30,13 +37,20 @@ const baseProjectsData = [
   {
     id: "companion-app",
     name: "companion-app",
-    title: "Companion App",
+    title: "Coffeely - Premium Companion Platform",
     category: "fullstack",
     categoryLabel: "Full-Stack App",
+    badgeText: "🔥 Top Featured",
     icon: "🤝",
-    desc: "Full-stack companion booking platform featuring real-time interactive chat, profile management, and seamless booking experience.",
-    longDesc: "A complete end-to-end full-stack web application designed for booking companion services. Features real-time messaging, secure user authentication, interactive dashboards, and responsive modern UI.",
-    tags: ["JavaScript", "Node.js", "Real-Time Chat", "Full-Stack", "Auth"],
+    desc: "End-to-end full-stack companion discovery and booking platform with real-time interactive messaging, verified profiles, and seamless UI.",
+    longDesc: "A high-conversion full-stack web application designed for booking verified companions for coffee dates and events. Features real-time chat, authenticated user profiles, modern dark glassmorphism layout, and responsive mobile-first UI.",
+    features: [
+      "Real-Time WebSocket Chat",
+      "Verified Profile Onboarding",
+      "Role-Based Booking Engine",
+      "Responsive Glassmorphic UI"
+    ],
+    tags: ["Node.js", "Express", "WebSocket Chat", "Full-Stack", "Auth System"],
     liveDemo: "https://coffeely-app.vercel.app/",
     github: "https://github.com/Priyanshu-kumar-maurya/companion-app",
     featured: true
@@ -44,13 +58,20 @@ const baseProjectsData = [
   {
     id: "event-planning-system",
     name: "Event-Planning-System-",
-    title: "Event Planning System",
+    title: "EventHub - College & Corporate Management",
     category: "fullstack",
-    categoryLabel: "Full-Stack System",
+    categoryLabel: "Management System",
+    badgeText: "🏆 Top Full-Stack",
     icon: "🎉",
-    desc: "Comprehensive event planning platform with booking management, scheduling, vendor coordination, and dashboard.",
-    longDesc: "Full-scale event planning web application with role-based dashboard, package selector, booking scheduler, and live event management tools.",
-    tags: ["JavaScript", "Node.js", "Express", "Full-Stack", "Event Tech"],
+    desc: "Comprehensive event management platform featuring role-based dashboards, vendor scheduling, ticket booking, and MongoDB integration.",
+    longDesc: "Full-scale college and corporate event management web application. Features live event publishing, ticket reservation counters, package selection, and complete administrative reporting.",
+    features: [
+      "Live Event Publishing & RSVP",
+      "Role-Based Admin Dashboard",
+      "MongoDB Real-Time Sync",
+      "Automated Event Reporting"
+    ],
+    tags: ["React.js", "Node.js", "Express", "MongoDB", "REST APIs"],
     liveDemo: "https://event-planning-system-topaz.vercel.app",
     github: "https://github.com/Priyanshu-kumar-maurya/Event-Planning-System-",
     featured: true
@@ -58,13 +79,20 @@ const baseProjectsData = [
   {
     id: "hotel-qr-project",
     name: "Hotel-QR-Project",
-    title: "Hotel QR Ordering System",
+    title: "SmartQR - Hotel & Dining Ordering System",
     category: "fullstack",
     categoryLabel: "Smart Ordering",
+    badgeText: "🏨 Contactless QR",
     icon: "🏨",
-    desc: "Contactless QR code food & dining ordering system for restaurants and hotels with live digital menu.",
-    longDesc: "Smart QR based contactless ordering system where guests scan table QR codes to browse live interactive menus, customize food items, and place direct orders.",
-    tags: ["JavaScript", "Node.js", "QR Tech", "Restaurant System", "REST API"],
+    desc: "Contactless digital dining web portal where guests scan table QR codes to browse live menus, customize dishes, and place direct orders.",
+    longDesc: "Smart QR-based restaurant hospitality system that replaces physical paper menus with an interactive digital order management experience. Real-time cart calculation, dish filtering, and instant kitchen ticketing.",
+    features: [
+      "Table QR Code Instant Launch",
+      "Live Categorized Food Menu",
+      "Real-Time Cart & Bill Summary",
+      "Zero-App Download Required"
+    ],
+    tags: ["JavaScript", "Node.js", "QR Technology", "Hospitality Tech", "REST API"],
     liveDemo: "https://hotel-qr-project.vercel.app",
     github: "https://github.com/Priyanshu-kumar-maurya/Hotel-QR-Project",
     featured: true
@@ -72,13 +100,20 @@ const baseProjectsData = [
   {
     id: "cockroach-mutual-aid",
     name: "cockroach-mutual-aid",
-    title: "Mutual Aid Platform",
+    title: "MutualAid - Emergency Community Board",
     category: "fullstack",
     categoryLabel: "Community Portal",
+    badgeText: "🤝 Community Aid",
     icon: "📋",
-    desc: "Hyperlocal community mutual aid support & resource distribution board for rapid assistance.",
-    longDesc: "Modern community support web app where users can broadcast assistance requests, offer local aid, filter by urgency/location, and connect directly with community helpers in real-time.",
-    tags: ["JavaScript", "Full-Stack", "Community Tech", "REST API"],
+    desc: "Hyperlocal mutual aid platform connecting citizens for urgent community assistance, essential supplies, and neighborhood solidarity.",
+    longDesc: "A community-first crisis response platform where verified neighbors can post urgent requests, offer local supplies, filter by distance and category, and communicate in real time.",
+    features: [
+      "Urgent Assistance Request Broadcasting",
+      "Location & Category Quick Filters",
+      "Community Solidarity Helper Matching",
+      "Mobile-First Rapid Access"
+    ],
+    tags: ["JavaScript", "Full-Stack", "Community Tech", "REST API", "Vercel"],
     liveDemo: "https://cockroach-mutual-aid.vercel.app/",
     github: "https://github.com/Priyanshu-kumar-maurya/cockroach-mutual-aid",
     featured: false
@@ -86,13 +121,20 @@ const baseProjectsData = [
   {
     id: "public-bulletin-news",
     name: "public-bulletin-news",
-    title: "Public Bulletin News",
+    title: "BulletinLive - Community News Portal",
     category: "fullstack",
-    categoryLabel: "News / Bulletin",
+    categoryLabel: "News Platform",
+    badgeText: "📰 Live Notices",
     icon: "📰",
-    desc: "Public bulletin announcement platform for broadcasting verified community notices and news updates.",
-    longDesc: "A responsive public bulletin news portal featuring categorized notice broadcasting, real-time article publishing, and user engagement tools.",
-    tags: ["JavaScript", "Full-Stack", "News Platform", "Netlify"],
+    desc: "Modern public bulletin portal for broadcasting verified community notices, local journalism, and breaking alerts with real-time publishing.",
+    longDesc: "A streamlined community publishing hub where verified contributors post localized bulletins, articles, and municipal advisories with category filtering and social engagement.",
+    features: [
+      "Instant Article & Bulletin Publishing",
+      "Categorized Notice Feeds",
+      "Community Engagement & Reactions",
+      "Fast Global CDN Delivery"
+    ],
+    tags: ["JavaScript", "Full-Stack", "Netlify Deploy", "Modern Web"],
     liveDemo: "https://public-bulletin.netlify.app/",
     github: "https://github.com/Priyanshu-kumar-maurya/public-bulletin-news",
     featured: false
@@ -100,13 +142,20 @@ const baseProjectsData = [
   {
     id: "bpo-bakaiti-hub",
     name: "bpo-bakaiti-hub",
-    title: "BPO Community Hub",
+    title: "BPO Vault - Call Center Team Hub",
     category: "fullstack",
     categoryLabel: "Web Platform",
+    badgeText: "🎧 Floor Hub",
     icon: "💬",
-    desc: "Interactive discussion & community hub web platform with lively threads and messaging.",
-    longDesc: "A dedicated community discussion forum and entertainment hub built for professionals with topic channels, real-time comments, and responsive UI.",
-    tags: ["JavaScript", "Full-Stack", "Render", "Interactive UI"],
+    desc: "Interactive collaboration and discussion web platform for BPO professionals featuring shift planner, Wall of Fame, and topic channels.",
+    longDesc: "A vibrant team engagement portal crafted for call center and support professionals. Features authenticated access, Shift Planner, Wall of Fame awards, and real-time community channels.",
+    features: [
+      "Shift Planner & Schedule Tracker",
+      "Wall of Fame Performance Awards",
+      "Encrypted Agent Profile Vault",
+      "Real-Time Group Interaction"
+    ],
+    tags: ["Node.js", "Express", "Interactive UI", "Render Cloud"],
     liveDemo: "https://bpo-bakaiti-hub.onrender.com",
     github: "https://github.com/Priyanshu-kumar-maurya/bpo-bakaiti-hub",
     featured: false
@@ -114,13 +163,20 @@ const baseProjectsData = [
   {
     id: "library-project",
     name: "library-project",
-    title: "Library Management System",
+    title: "LibraryPro - Enterprise Management System",
     category: "fullstack",
     categoryLabel: "Management Portal",
+    badgeText: "📚 Enterprise Auth",
     icon: "📚",
-    desc: "Role-based Library System with Admin & Student authentication, book inventory, reservations and analytics.",
-    longDesc: "A robust management web portal supporting dual role workflows (Librarian/Admin and Students). Features book cataloging, instant issue/return tracking, and user login.",
-    tags: ["HTML5", "JavaScript", "Auth System", "Management Portal"],
+    desc: "Role-based web portal with dual authentication (Admin & Student), real-time book cataloging, issue/return tracking, and reservation analytics.",
+    longDesc: "A production-style library management portal supporting dual workflows for librarians and students. Features book reservations, automated return tracking, role-based route guards, and clean management dashboard.",
+    features: [
+      "Dual Role Auth (Admin & Student)",
+      "Real-Time Book Inventory Catalog",
+      "Issue / Return Timeline Tracking",
+      "Dashboard Analytics & Reports"
+    ],
+    tags: ["JavaScript", "HTML5", "Authentication Guards", "Vercel Deploy"],
     liveDemo: "https://library-m.vercel.app/login.html",
     github: "https://github.com/Priyanshu-kumar-maurya/library-project",
     featured: true
@@ -128,13 +184,20 @@ const baseProjectsData = [
   {
     id: "jp-library",
     name: "Jp-Library",
-    title: "JP Library Showcase",
+    title: "JpLibrary - Modern Digital Showcase",
     category: "showcase",
     categoryLabel: "Digital Catalog",
+    badgeText: "📖 Book Catalog",
     icon: "📖",
-    desc: "Interactive digital book catalog and library showcase interface with rich UI card styling.",
-    longDesc: "An aesthetically pleasing digital library showcase featuring book carousels, genre filtering, and modern responsive CSS layout.",
-    tags: ["HTML5", "CSS3", "Vercel", "Digital Library"],
+    desc: "Aesthetic digital book catalog and literature showcase interface featuring genre carousels, responsive grid layouts, and reader previews.",
+    longDesc: "A minimalist, elegant digital library portal built for book enthusiasts. Features curated genre filtering, smooth book card hover interactions, and responsive reading previews.",
+    features: [
+      "Curated Literature Showcase",
+      "Genre & Author Quick Filtering",
+      "Aesthetic Dark Theme Cards",
+      "Responsive Mobile Navigation"
+    ],
+    tags: ["HTML5", "Modern CSS", "Vercel Deploy", "Digital Catalog"],
     liveDemo: "https://jp-library.vercel.app",
     github: "https://github.com/Priyanshu-kumar-maurya/Jp-Library",
     featured: false
@@ -142,13 +205,20 @@ const baseProjectsData = [
   {
     id: "bmw-shop",
     name: "BMW-SHOP",
-    title: "BMW Luxury Auto Showcase",
+    title: "BMW Studio - Luxury Automobile Showcase",
     category: "ecommerce",
-    categoryLabel: "Automotive / Store",
+    categoryLabel: "3D Auto Studio",
+    badgeText: "🏎️ 3D Studio",
     icon: "🚗",
-    desc: "High-end luxury automobile presentation with interactive model specs, aerodynamic styling, and dark theme.",
-    longDesc: "An immersive automobile digital showcase created for luxury sports vehicles. Built with rich animations, spec comparison sliders, and aerodynamic UI design.",
-    tags: ["HTML5", "Modern CSS", "Interactive UI", "Vercel"],
+    desc: "Immersive 3D automobile digital experience featuring interactive vehicle specs, 360° studio rotation, aerodynamic styling, and dark aesthetic.",
+    longDesc: "A luxury digital showroom built for sports cars and electric flagship sedans. Features interactive 3D model rotation, performance comparisons, specifications slider, and aerodynamic visual effects.",
+    features: [
+      "360° Interactive Studio Spin",
+      "Vehicle Spec Comparison Sliders",
+      "Aerodynamic Visual Effects",
+      "Luxury Dark Glassmorphic Theme"
+    ],
+    tags: ["HTML5", "Modern CSS", "3D Interactive UI", "Vercel Deploy", "Automotive UI"],
     liveDemo: "https://bmw-shop-three.vercel.app",
     github: "https://github.com/Priyanshu-kumar-maurya/BMW-SHOP",
     featured: true
@@ -156,13 +226,20 @@ const baseProjectsData = [
   {
     id: "earrings-shop",
     name: "Earrings-shop",
-    title: "Earrings Luxury Boutique",
+    title: "AuraJewels - Luxury Earrings Boutique",
     category: "ecommerce",
-    categoryLabel: "E-Commerce",
+    categoryLabel: "Luxury Boutique",
+    badgeText: "💎 Luxury Store",
     icon: "👂",
-    desc: "Elegant jewelry boutique e-commerce web storefront with product filtering, wishlisting, and luxury design.",
-    longDesc: "A polished and responsive luxury e-commerce website designed to showcase handcrafted jewelry and earrings. Features smooth category filters, wishlisting, and clean aesthetic layout.",
-    tags: ["JavaScript", "E-Commerce", "CSS Grid", "Vercel"],
+    desc: "Polished luxury e-commerce boutique storefront for handcrafted jewelry and earrings with price filtering, wishlist, and cart drawer.",
+    longDesc: "An elegant, high-converting jewelry boutique website designed with editorial minimalism. Features interactive product galleries, material filters, wishlist toggling, and frictionless checkout flow.",
+    features: [
+      "High-Res Product Showcase Galleries",
+      "Material & Price Filter Engine",
+      "Wishlist & Cart Slider Drawer",
+      "Editorial Luxury Design Aesthetics"
+    ],
+    tags: ["JavaScript", "E-Commerce", "CSS Grid", "Vercel Deploy"],
     liveDemo: "https://earrings-shop.vercel.app",
     github: "https://github.com/Priyanshu-kumar-maurya/Earrings-shop",
     featured: true
@@ -170,13 +247,20 @@ const baseProjectsData = [
   {
     id: "coffee-shop",
     name: "Coffee-shop",
-    title: "Cozy Coffee House",
+    title: "BrewCraft - Artisanal Coffee Roastery",
     category: "showcase",
-    categoryLabel: "Landing Page",
+    categoryLabel: "Artisanal Roastery",
+    badgeText: "☕ Artisanal Roastery",
     icon: "☕",
-    desc: "Warm artisanal cafe landing page with specialty brew menu, ambiance gallery, and table reservation.",
-    longDesc: "A cozy, warm aesthetic website for a boutique coffee house. Includes interactive brew menu tabs, customer testimonials, and an engaging mobile experience.",
-    tags: ["HTML5", "CSS3 Flexbox", "GitHub Pages", "Mobile UI"],
+    desc: "Warm luxury cafe landing page and ordering portal with signature brew catalog, live table reservation modal, and interactive cart.",
+    longDesc: "An artisanal boutique coffee house digital experience. Features warm dark typography, customer reviews, discount code engine (BREW15), and seamless table booking modal.",
+    features: [
+      "Interactive Signature Brew Menu",
+      "Table Booking Modal & Scheduler",
+      "Promo Code & Cart Calculation",
+      "Luxury Editorial Aesthetics"
+    ],
+    tags: ["HTML5", "CSS3 Flexbox", "JavaScript", "GitHub Pages", "Luxury UI"],
     liveDemo: "https://priyanshu-kumar-maurya.github.io/Coffee-shop/",
     github: "https://github.com/Priyanshu-kumar-maurya/Coffee-shop",
     featured: false
@@ -184,13 +268,20 @@ const baseProjectsData = [
   {
     id: "fast-foods",
     name: "fast-foods",
-    title: "Fast Foods Website",
+    title: "CraveBite - Gourmet Fast Food Delivery",
     category: "ecommerce",
-    categoryLabel: "Food Ordering",
+    categoryLabel: "Gourmet Food",
+    badgeText: "🍔 Gourmet Delivery",
     icon: "🍔",
-    desc: "Vibrant fast food ordering website with delicious visuals, combo sections and responsive UI layout.",
-    longDesc: "An interactive fast food ordering layout designed for speed and simplicity. Features animated meal cards, price calculators, and vibrant street-food visual vibes.",
-    tags: ["HTML5", "CSS3", "JavaScript", "GitHub Pages"],
+    desc: "High-conversion fast-food ordering portal featuring mouth-watering visuals, live cart management, combo discount codes, and responsive design.",
+    longDesc: "A vibrant and appetizing food ordering web app designed for lightning-fast mobile checkouts. Features animated meal cards, interactive burger customizers, and promo deals (TASTY20).",
+    features: [
+      "Dynamic Food Category Filtering",
+      "Real-Time Shopping Cart Counter",
+      "Special Combo Deals Engine",
+      "Responsive Mobile Touch UI"
+    ],
+    tags: ["JavaScript", "HTML5", "CSS3", "Food-Tech UI", "GitHub Pages"],
     liveDemo: "https://priyanshu-kumar-maurya.github.io/fast-foods/",
     github: "https://github.com/Priyanshu-kumar-maurya/fast-foods",
     featured: false
@@ -198,13 +289,20 @@ const baseProjectsData = [
   {
     id: "portfolio-site",
     name: "Portfolio",
-    title: "Official Portfolio Site",
+    title: "Priyanshu.dev - Official Developer Portfolio",
     category: "showcase",
-    categoryLabel: "Portfolio",
+    categoryLabel: "Developer Portfolio",
+    badgeText: "🚀 Portfolio Pro",
     icon: "💼",
-    desc: "Official personal developer portfolio website highlighting skillsets, project repository and resume.",
-    longDesc: "Interactive personal portfolio website featuring dark/light theme switching, skill badges, live project showcase, and downloadable resume CV.",
-    tags: ["HTML5", "CSS3", "JavaScript", "GitHub Pages"],
+    desc: "Flagship personal portfolio website highlighting 20+ live full-stack web applications, technical skillsets, and downloadable resume.",
+    longDesc: "Official portfolio website of Priyanshu Kumar Maurya. Features dark/light themes, live project showcases, GitHub repository links, contact form, and downloadable PDF resume.",
+    features: [
+      "20+ Live Hosted Web Applications",
+      "Interactive Skill Radar & Tags",
+      "One-Tap Resume PDF Download",
+      "Direct WhatsApp & Email Action"
+    ],
+    tags: ["HTML5", "CSS3", "JavaScript", "GitHub Pages", "Developer Brand"],
     liveDemo: "https://priyanshu-kumar-maurya.github.io/Portfolio/",
     github: "https://github.com/Priyanshu-kumar-maurya/Portfolio",
     featured: true
@@ -212,13 +310,20 @@ const baseProjectsData = [
   {
     id: "codex-priyanshu",
     name: "codex-priyanshu",
-    title: "Codex Priyanshu Hub",
+    title: "Codex Priyanshu - Brand & Developer Hub",
     category: "showcase",
-    categoryLabel: "Developer Hub",
+    categoryLabel: "Brand Hub",
+    badgeText: "⚡ Developer Hub",
     icon: "⚡",
-    desc: "Personal developer brand website and showcase page deployed on Vercel.",
-    longDesc: "Modern developer showcase featuring coding projects, technology stack, social connects, and contact options.",
-    tags: ["HTML5", "CSS3", "Vercel", "Branding"],
+    desc: "Personal developer brand portal showcasing web applications, coding achievements, social connects, and contact integrations.",
+    longDesc: "Modern developer brand destination deployed on Vercel. Features fast page load times, integrated social profiles (@codexs_priyanshu), and developer showcase cards.",
+    features: [
+      "High-Speed Vercel Edge Hosting",
+      "Social Media Quick Connects",
+      "Curated Technology Stack",
+      "Responsive Bento Layout"
+    ],
+    tags: ["HTML5", "Modern CSS", "Vercel Deploy", "Personal Branding"],
     liveDemo: "https://codex-priyanshu.vercel.app",
     github: "https://github.com/Priyanshu-kumar-maurya/codex-priyanshu",
     featured: false
@@ -226,13 +331,20 @@ const baseProjectsData = [
   {
     id: "calculator",
     name: "Calculator",
-    title: "Modern Web Calculator",
+    title: "NeoCalc - Glassmorphic Scientific Engine",
     category: "games",
-    categoryLabel: "Tool / Utility",
+    categoryLabel: "Math Engine",
+    badgeText: "🧮 Sci-Math Pro",
     icon: "🧮",
-    desc: "Clean and functional calculation tool with keyboard support and smooth button physics.",
-    longDesc: "A responsive and sleek web calculator with frosted glass styling, mathematical formula evaluation, clear history log, and responsive keypad layout.",
-    tags: ["HTML5", "CSS3", "JavaScript", "GitHub Pages"],
+    desc: "Sleek glassmorphic calculator with scientific functions (trig, log, powers), calculation history slide-over, keyboard hotkeys, and 1-tap copy.",
+    longDesc: "A responsive, keyboard-friendly scientific web calculator designed with frosted glass aesthetics, trigonometry, logarithmic operations, slide-up history panel, and audio feedback.",
+    features: [
+      "Collapsible Scientific Drawer",
+      "Persistent Calculation History",
+      "Dark & Light Theme Switching",
+      "Keyboard Hotkeys (F2, H, T)"
+    ],
+    tags: ["JavaScript", "Math Engine", "Glassmorphism", "Audio Feedback", "PWA Ready"],
     liveDemo: "https://priyanshu-kumar-maurya.github.io/Calculator/",
     github: "https://github.com/Priyanshu-kumar-maurya/Calculator",
     featured: false
@@ -240,13 +352,20 @@ const baseProjectsData = [
   {
     id: "qr-code-generator",
     name: "QR-code",
-    title: "QR Code Generator",
+    title: "QuickQR - High-Speed QR Generator",
     category: "games",
-    categoryLabel: "Web Tool",
+    categoryLabel: "Web Utility",
+    badgeText: "📱 Instant Utility",
     icon: "📱",
-    desc: "Instant QR Code generator web utility for URLs, text, and contact cards.",
-    longDesc: "A lightweight, instant QR code generator web application that allows visitors to convert links, text, and contact information into high-resolution QR codes.",
-    tags: ["HTML5", "JavaScript", "QR API", "GitHub Pages"],
+    desc: "Instant client-side QR Code generator web utility for URLs, WiFi credentials, plain text, and contact vCards with one-tap download.",
+    longDesc: "A lightweight, lightning-fast QR utility that converts any text, link, or WiFi configuration into high-resolution scannable QR codes instantly with customizable sizing and SVG export.",
+    features: [
+      "Instant Client-Side QR Rendering",
+      "WiFi, URL & vCard Formatting",
+      "Custom Color & Size Adjustments",
+      "1-Tap Image Download"
+    ],
+    tags: ["HTML5", "JavaScript", "QR Code API", "GitHub Pages"],
     liveDemo: "https://priyanshu-kumar-maurya.github.io/QR-code/",
     github: "https://github.com/Priyanshu-kumar-maurya/QR-code",
     featured: false
@@ -254,13 +373,20 @@ const baseProjectsData = [
   {
     id: "watch-app",
     name: "watch",
-    title: "Digital Clock & Watch",
+    title: "ChronoLux - Swiss Precision Chronometer",
     category: "games",
-    categoryLabel: "Web Tool",
+    categoryLabel: "Timepiece HUD",
+    badgeText: "⌚ Luxury Chrono",
     icon: "⏰",
-    desc: "Interactive digital & analog clock web application with real-time precision timekeeping.",
-    longDesc: "An elegant digital clock web application with customizable dark/light faces, seconds ticker, and date indicators.",
-    tags: ["HTML5", "CSS3", "JavaScript", "GitHub Pages"],
+    desc: "Multi-mode luxury timepiece featuring Swiss mechanical analog dial with smooth sweep, cyberpunk atomic digital HUD, stopwatch, and timer.",
+    longDesc: "An exquisite luxury timekeeping web application. Features 5 distinct operational modes: Analog Chronograph, Atomic Digital HUD, Millisecond Stopwatch with Lap Recorder, Pomodoro Focus Timer, and Multi-Timezone World Clock.",
+    features: [
+      "Mechanical Sweep vs Quartz Ticking",
+      "5 Modes (Analog, Digital, Lap, Timer, World)",
+      "4 Premium Dial Themes & Night Lume",
+      "Sound Synthesizer & Vibration"
+    ],
+    tags: ["JavaScript", "SVG Graphics", "Web Audio API", "Luxury UI", "Chronometer"],
     liveDemo: "https://priyanshu-kumar-maurya.github.io/watch/",
     github: "https://github.com/Priyanshu-kumar-maurya/watch",
     featured: false
@@ -268,13 +394,20 @@ const baseProjectsData = [
   {
     id: "ambient-light-effects",
     name: "Ambient-Light-Effects",
-    title: "Ambient Light Effects",
+    title: "LuminaFX - 3D Ambient Light Engine",
     category: "games",
-    categoryLabel: "CSS Experiment",
+    categoryLabel: "3D Light Studio",
+    badgeText: "✨ 3D Light Studio",
     icon: "💡",
-    desc: "Interactive CSS ambient glowing lighting effects and visual neon animations.",
-    longDesc: "A creative CSS visual experiment displaying multi-layered ambient lighting, glass reflection highlights, and neon glow effects.",
-    tags: ["CSS3 Glow", "Animations", "UI Experiments", "GitHub Pages"],
+    desc: "3D interactive holographic light engine featuring 360° mouse drag rotation, 4 geometry meshes (Cube, Portal, Prism, TV), and bloom studio.",
+    longDesc: "A cutting-edge CSS 3D visual experiment and ambient lighting studio. Features full 360° touch and mouse drag rotation, custom hex color glow picker, pulsing breathing light, and floating canvas particle dust.",
+    features: [
+      "360° Touch/Mouse Drag 3D Rotation",
+      "4 Meshes (Cube, Portal, Prism, Ambilight TV)",
+      "Custom Hex Glow & Bloom Controls",
+      "Floating Ambient Dust Particle Canvas"
+    ],
+    tags: ["CSS 3D Transforms", "Canvas Engine", "Lighting Studio", "Interactive FX"],
     liveDemo: "https://priyanshu-kumar-maurya.github.io/Ambient-Light-Effects/",
     github: "https://github.com/Priyanshu-kumar-maurya/Ambient-Light-Effects",
     featured: false
@@ -282,12 +415,19 @@ const baseProjectsData = [
   {
     id: "job-application-web",
     name: "job-Application-web-",
-    title: "Job Application Portal",
+    title: "CareerConnect - Smart Job Portal",
     category: "fullstack",
-    categoryLabel: "Web Portal",
+    categoryLabel: "Job Portal",
+    badgeText: "📝 Job Portal",
     icon: "📝",
-    desc: "Interactive job application form and applicant submission web interface with validation.",
-    longDesc: "Clean and structured job application web portal with multi-section form validation, resume upload fields, and user feedback.",
+    desc: "Interactive multi-step job application portal featuring live field validation, resume upload simulator, and instant applicant confirmation.",
+    longDesc: "A structured corporate job application web portal designed for frictionless candidate onboarding. Features client-side form validation, resume drag-and-drop, and confirmation modals.",
+    features: [
+      "Multi-Step Onboarding Form",
+      "Real-Time Input Validation",
+      "Resume Upload Experience",
+      "Instant Submission Confirmation"
+    ],
     tags: ["HTML5", "JavaScript", "Form Validation", "GitHub Pages"],
     liveDemo: "https://priyanshu-kumar-maurya.github.io/job-Application-web-/",
     github: "https://github.com/Priyanshu-kumar-maurya/job-Application-web-",
@@ -298,13 +438,18 @@ const baseProjectsData = [
 // Active Projects Array
 let projectsData = [...baseProjectsData];
 
-// Load previously cached GitHub sync data if available
-const cachedProjects = localStorage.getItem("pk_github_projects_cache");
+// Load previously cached GitHub sync data if available with baseMap enrichment
+const cachedProjects = localStorage.getItem("pk_github_projects_cache_v3");
 if (cachedProjects) {
   try {
     const parsed = JSON.parse(cachedProjects);
     if (Array.isArray(parsed) && parsed.length > 0) {
-      projectsData = parsed;
+      const baseMap = new Map();
+      baseProjectsData.forEach(p => baseMap.set(p.name ? p.name.toLowerCase() : p.id.toLowerCase(), p));
+      projectsData = parsed.map(p => {
+        const base = baseMap.get(p.name ? p.name.toLowerCase() : p.id.toLowerCase());
+        return base ? { ...base, ...p, features: base.features, badgeText: base.badgeText, title: base.title, desc: base.desc, longDesc: base.longDesc } : p;
+      });
     }
   } catch (e) {
     console.warn("Could not parse cached projects:", e);
@@ -667,7 +812,7 @@ function renderProjects() {
               </div>
               <div class="stage-status">
                 <span class="status-pulse-green"></span>
-                <span>Ready</span>
+                <span>${proj.badgeText || 'Ready'}</span>
               </div>
             </div>
             <div class="preview-stage-screen">
@@ -686,10 +831,13 @@ function renderProjects() {
           </div>
 
           <div class="project-details">
-            <h3 class="project-title">${proj.title}</h3>
+            <div class="project-header-row">
+              <h3 class="project-title">${proj.title}</h3>
+              <span class="project-cat-chip">${proj.categoryLabel || 'Web App'}</span>
+            </div>
             <p class="project-desc">${proj.desc}</p>
             <div class="project-tags">
-              ${(proj.tags || []).map(tag => `<span class="tag-pill">${tag}</span>`).join('')}
+              ${(proj.tags || []).slice(0, 4).map(tag => `<span class="tag-pill"><i class="fa-solid fa-bolt" style="font-size: 0.58rem; color: var(--primary-light);"></i> ${tag}</span>`).join('')}
             </div>
           </div>
         </div>
@@ -704,7 +852,7 @@ function renderProjects() {
           <a href="${proj.github}" target="_blank" rel="noopener noreferrer" class="btn-card btn-card-secondary" title="View Source Code on GitHub" onclick="playTone(440, 'sine', 0.06)">
             <i class="fa-brands fa-github"></i> Code
           </a>
-          <button class="btn-card btn-card-info" onclick="openProjectModal('${proj.id}')" title="Project Details">
+          <button class="btn-card btn-card-info" onclick="openProjectModal('${proj.id}')" title="Full Project Specs & Engineering">
             <i class="fa-solid fa-circle-info"></i>
           </button>
         </div>
@@ -755,39 +903,79 @@ function openProjectModal(id) {
   const proj = projectsData.find(p => p.id === id);
   if (!proj || !projectModalBody || !projectModalOverlay) return;
 
+  const domainText = cleanDomain(proj.liveDemo);
+  const previewSrc = getProjectPreviewImage(proj);
+  const targetUrl = proj.liveDemo || proj.github;
+
+  const featuresList = proj.features || [
+    "High-Performance Web Architecture",
+    "100% Mobile & Touch Responsive",
+    "Modern Glassmorphic Aesthetics",
+    "Seamless Cross-Browser Support"
+  ];
+
   projectModalBody.innerHTML = `
-    <div style="display: flex; align-items: center; gap: 0.85rem; margin-bottom: 1rem;">
-      <div style="font-size: 2.5rem; width: 54px; height: 54px; background: rgba(255,255,255,0.06); border-radius: 14px; display: flex; align-items: center; justify-content: center;">
-        ${proj.icon || '⚡'}
+    <!-- Top Hero Visual Banner with Live Screenshot -->
+    <div class="modal-proj-hero">
+      <img src="${previewSrc}" alt="${proj.title} Preview" class="modal-proj-hero-img" onerror="handlePreviewImgError(this, '${targetUrl}')" />
+      <div class="modal-hero-badge">
+        <i class="fa-solid fa-lock" style="font-size: 0.65rem; color: #34d399;"></i>
+        <span>${domainText}</span>
       </div>
-      <div>
-        <h2 style="font-family: var(--font-heading); font-size: 1.35rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.2rem;">
-          ${proj.title}
-        </h2>
-        <span class="project-cat-badge">${proj.categoryLabel || 'Project'}</span>
+      <div class="modal-hero-status">
+        <span class="status-pulse-green"></span>
+        <span>${proj.badgeText || 'Live & Verified'}</span>
       </div>
     </div>
 
-    <div style="margin-bottom: 1.25rem;">
-      <h4 style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.4rem; letter-spacing: 0.05em;">Overview</h4>
-      <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+    <!-- Title & Category Heading -->
+    <div style="margin-bottom: 0.85rem;">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.35rem;">
+        <h2 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 800; color: var(--text-main); margin: 0; line-height: 1.3;">
+          ${proj.title}
+        </h2>
+        <span class="project-cat-badge">${proj.categoryLabel || 'Featured Project'}</span>
+      </div>
+      <p style="font-size: 0.86rem; color: var(--text-muted); line-height: 1.6; margin: 0.4rem 0 0.85rem 0;">
         ${proj.longDesc || proj.desc}
       </p>
     </div>
 
-    <div style="margin-bottom: 1.5rem;">
-      <h4 style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.5rem; letter-spacing: 0.05em;">Tech Stack & Highlights</h4>
-      <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
-        ${(proj.tags || []).map(tag => `<span class="skill-pill" style="font-size: 0.76rem; padding: 0.3rem 0.65rem;"><i class="fa-solid fa-code"></i> ${tag}</span>`).join('')}
+    <!-- Engineering Highlights / Key Features Grid -->
+    <div style="margin-bottom: 1.1rem;">
+      <h4 style="font-size: 0.74rem; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.45rem; letter-spacing: 0.06em; display: flex; align-items: center; gap: 0.4rem;">
+        <i class="fa-solid fa-sparkles" style="color: #ec4899;"></i> Core Highlights & Engineering
+      </h4>
+      <div class="modal-features-grid">
+        ${featuresList.map(feat => `
+          <div class="modal-feature-item">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>${feat}</span>
+          </div>
+        `).join('')}
       </div>
     </div>
 
-    <div style="display: flex; gap: 0.75rem; margin-top: 1.25rem;">
-      <a href="${proj.liveDemo}" target="_blank" rel="noopener noreferrer" class="btn-card btn-card-primary" style="padding: 0.7rem; font-size: 0.85rem;">
-        <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Live App
+    <!-- Tech Stack & Architecture Tags -->
+    <div style="margin-bottom: 1.25rem;">
+      <h4 style="font-size: 0.74rem; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.45rem; letter-spacing: 0.06em;">
+        <i class="fa-solid fa-layer-group" style="color: #a78bfa;"></i> Tech Stack & Architecture
+      </h4>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+        ${(proj.tags || []).map(tag => `<span class="skill-pill" style="font-size: 0.74rem; padding: 0.3rem 0.65rem;"><i class="fa-solid fa-code"></i> ${tag}</span>`).join('')}
+      </div>
+    </div>
+
+    <!-- 3-Button High-Converting Action Bar -->
+    <div class="modal-actions-grid">
+      <button class="btn-card btn-card-preview" onclick="closeProjectModal(); openLivePreview('${proj.id}')" title="Test Live Interactive Simulator">
+        <i class="fa-solid fa-play"></i> Simulator
+      </button>
+      <a href="${proj.liveDemo}" target="_blank" rel="noopener noreferrer" class="btn-card btn-card-primary" title="Launch Full App">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i> Open App
       </a>
-      <a href="${proj.github}" target="_blank" rel="noopener noreferrer" class="btn-card btn-card-secondary" style="padding: 0.7rem; font-size: 0.85rem;">
-        <i class="fa-brands fa-github"></i> GitHub Repo
+      <a href="${proj.github}" target="_blank" rel="noopener noreferrer" class="btn-card btn-card-secondary" title="View Source on GitHub">
+        <i class="fa-brands fa-github"></i> Code
       </a>
     </div>
   `;
